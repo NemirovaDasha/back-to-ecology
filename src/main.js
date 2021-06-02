@@ -8,11 +8,13 @@ import TypoLink1 from "./components/TypoLink1";
 import TypoLink2 from "./components/TypoLink2";
 import TypoButton from "./components/TypoButton";
 import TypoGameButton from "./components/TypoGameButton";
+import TypoH2Bold from "./components/TypoH2Bold";
 
 Vue.config.productionTip = false
 
 Vue.component('TypoH1', TypoH1)
 Vue.component('TypoH2', TypoH2)
+Vue.component('TypoH2Bold', TypoH2Bold)
 Vue.component('TypoLink1', TypoLink1)
 Vue.component('TypoLink2', TypoLink2)
 Vue.component('TypoButton', TypoButton)

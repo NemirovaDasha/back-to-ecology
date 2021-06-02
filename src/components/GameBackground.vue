@@ -9,7 +9,10 @@
           .game__smoke-container
             img.game__smoke2(src="assets/img/game/main/smoke/smoke3.svg")
             img.game__smoke1(src="assets/img/game/main/smoke/smoke1.svg")
-          button.game__image-button(type="button")
+          button.game__image-button(
+            type="button"
+            @click="$emit('start-game-train')"
+            )
             img.game__train(src="assets/img/game/main/train2.svg")
 
       transition(name='game-images')
@@ -46,13 +49,13 @@
           key="4"
         )
           .game__house1-container
-            button.game__image-button(type="button")
+            router-link.game__image-button(:to="{name: 'House'}")
               img.game__house1(src="assets/img/game/main/house1.svg")
           .game__house2-container
-            button.game__image-button(type="button")
+            router-link.game__image-button(:to="{name: 'House'}")
               img.game__house2(src="assets/img/game/main/house2.svg")
           .game__house3-container
-            button.game__image-button(type="button")
+            router-link.game__image-button(:to="{name: 'House'}")
               img.game__house3(src="assets/img/game/main/house3.svg")
 
           .game__houses-container

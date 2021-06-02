@@ -375,6 +375,21 @@ a, p {
   }
 }
 
+.back-to-game {
+  left:  16px!important;
+  right: auto!important;
+
+  @include w-from($screen-md) {
+    right: 132px!important;
+    left:  auto!important;
+  }
+
+  @include w-from($screen-lg) {
+    right: 212px!important;
+    left:  auto!important;
+  }
+}
+
 
 @keyframes transformTree {
   0% {

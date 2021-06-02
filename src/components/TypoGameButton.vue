@@ -2,20 +2,20 @@
   button.t-link-game(
     type="button"
     @click="clickButton"
-    )
+  )
     slot
 </template>
 
 <script>
 export default {
-  props:{
-    clickFunction:{
+  props: {
+    clickFunction: {
       type: String,
       require: false
     }
   },
-  methods:{
-    clickButton(){
+  methods: {
+    clickButton() {
       this.$emit(this.clickFunction)
     }
   }

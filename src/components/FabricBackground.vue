@@ -15,7 +15,6 @@
     img.fabric__build(src="assets/img/game/fabric/fabric.svg")
 
     img.fabric__hero(src="assets/img/game/fabric/hero.svg")
-    img.fabric__background(src="assets/img/game/fabric/background.svg")
 </template>
 
 <script>
@@ -27,15 +26,6 @@ export default {}
   position: relative;
   width:    100%;
   height:   100vh;
-
-  &__background {
-    width:    100vw;
-    position: absolute;
-    bottom:   0;
-    left:     0;
-    right:    0;
-    z-index:  5;
-  }
 
   &__hero {
     position: absolute;

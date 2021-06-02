@@ -7,24 +7,75 @@
         @next-step="switchStep"
         :click-function="'next-step'"
       ) Что можно сделать?
+
     template(v-if="idBlockShow===1")
-      p(style="text-align: center") Давай посмотрим, чем занимаются на заводах
-      TypoGameButton Дальше
+      //p(style="text-align: center") Давай посмотрим, чем занимаются на заводах
+      //TypoGameButton(
+      //  @start-conveyor="startGameConveyor"
+      //  :click-function="'start-conveyor'"
+      //) Дальше
 
       p(style="text-align: center; margin-top: 24px") Давай посадим пару семечек и вырастим целый лес!
-      TypoGameButton Дальше
+      TypoGameButton(
+        @start-trees="startGameTrees"
+        :click-function="'start-trees'"
+      ) Дальше
+
+    template(v-if="idBlockShow===2")
+      template(v-if="gameTreesEnd")
+        GameText(
+          :text-list="treesEndText"
+          :is-button="true"
+          :link-text="'Закончить игру'"
+          :click-function="'end-game-trees'"
+          style="z-index: 2000;"
+          @end-game-trees="endGameTrees"
+        )
+      template(v-else)
+        p(style="text-align: center") Давай посадим росточки в ямки и вырастим целый лес!
+        p(style="text-align: center") Перетаскивай расточки в ямки с помощью мышки
+
 </template>
 
 <script>
+import GameText from "./GameText";
+
 export default {
+  components: {GameText},
+  props: {
+    gameTreesEnd: {
+      type: Boolean,
+      require: false
+    }
+  },
   data() {
     return {
-      idBlockShow: 0
+      idBlockShow: 0,
+      treesEndText: [
+        {
+          id: 0,
+          text: 'Здорово! Ты вырастил целый лес, теперь они будут помогать природе.'
+        },
+        {
+          id: 1,
+          text: 'Деревья будут очищать воздух, а в лесу будут жить звери'
+        }
+      ]
     }
   },
   methods: {
     switchStep() {
       this.idBlockShow = this.idBlockShow + 1
+    },
+    startGameConveyor() {
+      this.$emit('start-game-conveyor')
+    },
+    startGameTrees() {
+      this.idBlockShow = 2
+      this.$emit('start-game-trees')
+    },
+    endGameTrees() {
+      this.$emit('end-game-trees')
     }
   }
 }
@@ -37,13 +88,24 @@ export default {
     padding:    60px 16px 0;
     box-sizing: border-box;
 
-    @include w-from($screen-lg) {
-      max-width: 50vw;
-      padding:   50px 0 0 50px;
-    }
-
     p {
       margin-bottom: 20px;
+    }
+
+    @include w-from($screen-lg) {
+      max-width: 58vw;
+      padding:   30px 0 0 50px;
+
+      p {
+        font-size:   18px;
+        line-height: 24px;
+        margin-bottom: 10px;
+      }
+    }
+
+    @include w-from($screen-xl) {
+      max-width: 58vw;
+      padding:   50px 0 0 50px;
     }
   }
 

@@ -15,6 +15,7 @@
     button.button.game__button.t-blue(
       v-if="isButton"
       type="button"
+      @click="clickButton"
     ) {{linkText}}
     button.t-link1.game__link(
       v-else
@@ -41,11 +42,18 @@ export default {
     linkText: {
       type: String,
       require: true
+    },
+    clickFunction: {
+      type: String,
+      require: false
     }
   },
   methods: {
     addStep() {
       this.$emit('show-next-step')
+    },
+    clickButton(){
+      this.$emit(this.clickFunction)
     }
   }
 }
