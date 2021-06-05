@@ -4,7 +4,7 @@
       GameClouds
       transition(name='game-transition' tag="div")
         GameText(
-          v-if="step<8"
+          v-if="step<8 & !isMiniGame"
           :text-list="nextStep.info.textList"
           :image="nextStep.info.image"
           :is-button="false"
@@ -12,6 +12,8 @@
           @show-next-step="switchStep"
           :key="step"
         )
+
+      transition(name='game-transition' tag="div")
         GameText(
           v-if="isMiniGame"
           :text-list="miniGameStates[miniGameIndex].gameItems[stepMiniGame].textList"
@@ -23,10 +25,11 @@
         )
 
       GameBackground(
-        :background="nextStep.background.mainImage"
+        :background-id="nextStep.background.mainImageId"
         :show-item-id="nextStep.background.addElementId"
         :key="nextStep.background.addElementId"
-        @start-game-train="isMiniGame=true"
+        @start-game-train="startGameTrain"
+        @start-game-car="startGameCar"
       )
       TypoLink2(:href="{name: 'Home'}") Выйти на главную
 
@@ -60,7 +63,7 @@ export default {
             image: ''
           },
           background: {
-            mainImage: 'assets/img/game/back.svg',
+            mainImageId: 1,
             addElementId: 0
           }
         },
@@ -75,7 +78,7 @@ export default {
             image: 'assets/img/game/main/train.svg'
           },
           background: {
-            mainImage: 'assets/img/game/back.svg',
+            mainImageId: 1,
             addElementId: 0
           }
         },
@@ -90,7 +93,7 @@ export default {
             image: ''
           },
           background: {
-            mainImage: 'assets/img/game/back2.svg',
+            mainImageId: 2,
             addElementId: 1
           }
         },
@@ -105,7 +108,7 @@ export default {
             image: 'assets/img/game/main/car.svg'
           },
           background: {
-            mainImage: 'assets/img/game/back2.svg',
+            mainImageId: 2,
             addElementId: 1
           }
         },
@@ -120,7 +123,7 @@ export default {
             image: ''
           },
           background: {
-            mainImage: 'assets/img/game/back2.svg',
+            mainImageId: 2,
             addElementId: 2
           }
         },
@@ -135,7 +138,7 @@ export default {
             image: ''
           },
           background: {
-            mainImage: 'assets/img/game/back2.svg',
+            mainImageId: 2,
             addElementId: 2
           }
         },
@@ -150,7 +153,7 @@ export default {
             image: ''
           },
           background: {
-            mainImage: 'assets/img/game/back3.svg',
+            mainImageId: 3,
             addElementId: 3
           }
         },
@@ -165,7 +168,7 @@ export default {
             image: ''
           },
           background: {
-            mainImage: 'assets/img/game/back3.svg',
+            mainImageId: 3,
             addElementId: 3
           }
         }
@@ -209,7 +212,7 @@ export default {
               textList: [
                 {
                   id: 0,
-                  text: 'Раньше машины выглядели примерно так и были диковинкой. Сейчас марок и видов машин очень много и машина есть практически у каждой семьи. Машина работает за счет двигателя. Но он во время работы выделяет выхлопные газы в воздух. Портится воздух и из-за этого всем становиться тяжело.'
+                  text: 'Раньше машины выглядели примерно так и были диковинкой. Сейчас марок и видов машин очень много. Машина работает за счет двигателя. Но он во время работы выделяет выхлопные газы. Портится воздух и из-за этого всем становиться тяжело.'
                 }
               ],
               image: 'assets/img/game/main/car.svg',
@@ -265,6 +268,14 @@ export default {
       } else {
         this.stepMiniGame += 1
       }
+    },
+    startGameTrain() {
+      this.isMiniGame = true;
+      this.miniGameIndex = 0;
+    },
+    startGameCar() {
+      this.isMiniGame = true;
+      this.miniGameIndex = 1;
     }
   },
   mounted() {

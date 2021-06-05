@@ -1,24 +1,26 @@
 <template lang="pug">
   .game__background
     .game__image-container
-      transition(name='game-images')
+      transition(name='game-images' appear)
         .game__train-container(
           v-show="showItemId>0"
           key="1"
-          )
+          :class="{'show-animation': showItemId===1}"
+        )
           .game__smoke-container
             img.game__smoke2(src="assets/img/game/main/smoke/smoke3.svg")
             img.game__smoke1(src="assets/img/game/main/smoke/smoke1.svg")
           button.game__image-button(
             type="button"
             @click="$emit('start-game-train')"
-            )
+          )
             img.game__train(src="assets/img/game/main/train2.svg")
 
-      transition(name='game-images')
+      transition(name='game-images' appear)
         .game__fabric-container(
           v-show="showItemId>0"
           key="2"
+          :class="{'show-animation': showItemId===1}"
         )
           .game__smoke-container.m-fabric1
             img.game__smoke3(src="assets/img/game/main/smoke/smoke3.svg")
@@ -35,43 +37,80 @@
           router-link.game__image-button(:to="{name: 'Fabric'}")
             img.game__fabric(src="assets/img/game/main/fabric.svg")
 
-      transition(name='game-images')
+      transition(name='game-images' appear)
         .game__car-container(
           v-show="showItemId>1"
           key="3"
+          :class="{'show-animation': showItemId===2}"
         )
-          button.game__image-button(type="button")
+          button.game__image-button(
+            type="button"
+            @click="$emit('start-game-car')"
+          )
             img.game__car(src="assets/img/game/main/car.svg")
 
-      transition(name='game-images')
-        .game__house-container(
-          v-if="showItemId>2"
-          key="4"
-        )
-          .game__house1-container
+      .game__house-container
+        transition(name='game-houses' appear)
+          .game__house1-container(
+            v-if="showItemId>2"
+            key="4"
+            :class="{'show-animation': showItemId===3}"
+          )
             router-link.game__image-button(:to="{name: 'House'}")
               img.game__house1(src="assets/img/game/main/house1.svg")
-          .game__house2-container
+
+        transition(name='game-houses' appear)
+          .game__house2-container(
+            v-if="showItemId>2"
+            key="4"
+            :class="{'show-animation': showItemId===3}"
+          )
             router-link.game__image-button(:to="{name: 'House'}")
               img.game__house2(src="assets/img/game/main/house2.svg")
-          .game__house3-container
+
+        transition(name='game-houses' appear)
+          .game__house3-container(
+            v-if="showItemId>2"
+            key="4"
+            :class="{'show-animation': showItemId===3}"
+          )
             router-link.game__image-button(:to="{name: 'House'}")
               img.game__house3(src="assets/img/game/main/house3.svg")
 
-          .game__houses-container
+        transition(name='game-houses' appear)
+          .game__houses-container(
+            v-if="showItemId>2"
+            key="4"
+            :class="{'show-animation': showItemId===3}"
+          )
             img.game__houses(src="assets/img/game/main/houses.svg")
 
       transition(name='game-back')
-        img.game__back(
-          :src="background"
+        .game__background-container
+          img.game__back(
+            v-if="backgroundId===1"
+            src="assets/img/game/back.svg"
           )
+      transition(name='game-back')
+        .game__background-container.m-second
+          img.game__back(
+            v-if="backgroundId===2"
+            src="assets/img/game/back2.svg"
+          )
+      transition(name='game-back')
+        .game__background-container.m-third
+          img.game__back(
+            v-if="backgroundId===3"
+            src="assets/img/game/back3.svg"
+          )
+
 </template>
 
 <script>
 export default {
   props: {
-    background: {
-      type: String,
+    backgroundId: {
+      type: Number,
       require: true
     },
     showItemId: {
@@ -120,11 +159,26 @@ export default {
     object-fit: cover;
   }
 
+  &__background-container {
+    width:           100%;
+    background:      url("/assets/img/game/back.svg") no-repeat bottom;
+    background-size: contain;
+
+    &.m-second {
+      background: url("/assets/img/game/back2.svg") no-repeat bottom;
+    }
+
+    &.m-third {
+      background: url("/assets/img/game/back3.svg") no-repeat bottom;
+    }
+  }
+
   &__train-container {
     position: absolute;
     top:      -1.4vw;
     left:     4.5vw;
     width:    9vw;
+    z-index:  100;
   }
 
   &__fabric-container {
@@ -132,6 +186,7 @@ export default {
     top:      1.5vw;
     right:    2.2vw;
     width:    24vw;
+    z-index:  100;
   }
 
   &__car-container {
@@ -140,10 +195,15 @@ export default {
     right:     22.2vw;
     width:     7.5vw;
     animation: moveTransport 2s infinite;
+    z-index:   100;
 
     @include hover() {
       animation-play-state: paused;
     }
+  }
+
+  &__house-container {
+    z-index: 100;
   }
 
   &__houses-container {
@@ -152,6 +212,7 @@ export default {
     bottom:         5vw;
     width:          87vw;
     pointer-events: none;
+    z-index:        100;
 
     img {
       width: 100%;
@@ -164,6 +225,7 @@ export default {
     width:     10vw;
     bottom:    17vw;
     animation: moveHouses 2s infinite;
+    z-index:   100;
 
     @include hover() {
       animation-play-state: paused;
@@ -176,6 +238,7 @@ export default {
     right:     27.5vw;
     width:     10.3vw;
     animation: moveHouses 2s infinite;
+    z-index:   100;
 
     @include hover() {
       animation-play-state: paused;
@@ -188,6 +251,7 @@ export default {
     left:      10.6vw;
     width:     5.3vw;
     animation: moveHouses 2s infinite;
+    z-index:   100;
 
     @include hover() {
       animation-play-state: paused;
@@ -240,17 +304,32 @@ export default {
 }
 
 .game-images-enter-active {
-  animation: game-images-in .5s;
-}
-.game-images-leave-active {
-  animation: game-images-in .5s reverse;
+  &.show-animation {
+    animation: game-images-in 1s;
+    z-index:   1000;
+  }
 }
 
-.game-back-enter-active, .game-back-leave-active {
-  transition: opacity .5s;
+.game-houses-enter-active {
+  transition: opacity 1s;
+  z-index:    1000;
 }
-.game-back-enter, .game-back-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+
+.game-houses-enter {
+  opacity: 0.3;
+}
+
+.game-back-enter-active {
+  transition: opacity 3s;
+  z-index:    5;
+}
+
+.game-back-enter {
   opacity: 0;
+}
+
+.game-back-enter-to {
+  opacity: 1;
 }
 
 @keyframes game-images-in {
@@ -258,7 +337,7 @@ export default {
     transform: scale(0);
   }
   50% {
-    transform: scale(1.5);
+    transform: scale(1.2);
   }
   100% {
     transform: scale(1);

@@ -8,19 +8,29 @@
       @click-human="checkPassenger"
     )
 
-    TrainBackgroundPassenger.mod-hidden(
-      v-for="passenger in passengerList"
-      :key="passenger.id"
-      :passenger-parameter="passenger"
-    )
-
     BaseGameHelp(
       v-if="helpParameter.show"
       :class="helpParameter.class"
       @close="helpParameter.show=false"
     ) {{helpParameter.text}}
 
-    img.train__background(src="assets/img/game/train/background.svg" alt="Задний фон")
+    .train__train-container
+      transition(name="train")
+        .train__train-with-passengers(
+          v-if="gameCounter<7"
+          :key="1"
+        )
+          .train__passengers
+            TrainBackgroundPassenger.mod-hidden(
+              v-for="passenger in passengerList"
+              :key="passenger.id"
+              :passenger-parameter="passenger"
+            )
+          .train__train
+            img.picture(src="assets/img/game/train/train.svg" alt="Поезд")
+
+    img.train__trees(src="assets/img/game/train/trees.svg" alt="Декор")
+    img.train__background(src="assets/img/game/train/background_2.svg" alt="Задний фон")
 
 </template>
 
@@ -103,7 +113,7 @@ export default {
           id: 'passenger-2',
           src: 'assets/img/game/train/people/human2-2.svg',
           position: {
-            right: '34.31%',
+            right: '34.3%',
             topPosition: true
           }
         },
@@ -111,7 +121,7 @@ export default {
           id: 'passenger-3',
           src: 'assets/img/game/train/people/human3-2.svg',
           position: {
-            right: '4.4%',
+            right: '4.3%',
             topPosition: false
           }
         },
@@ -127,7 +137,7 @@ export default {
           id: 'passenger-5',
           src: 'assets/img/game/train/people/human5-2.svg',
           position: {
-            right: '15.9%',
+            right: '15.8%',
             topPosition: true
           }
         },
@@ -163,22 +173,30 @@ export default {
             text: 'ой, это же работник камеры хранения, он не может уйти'
           }
         ]
-      }
+      },
+      gameCounter: 0
     }
   },
   methods: {
     checkPassenger(human) {
       const humanId = human.id.split('-')[1];
       if (human.name === "passenger") {
-        const passenger = document.getElementById('passenger-' + humanId)
-        passenger.classList.remove('mod-hidden')
-        human.classList.add('mod-hidden')
+        const passenger = document.getElementById('passenger-' + humanId);
+        passenger.classList.remove('mod-hidden');
+        human.classList.add('mod-hidden');
+        this.gameCounter += 1;
 
+        if (this.gameCounter===7){
+          setTimeout(this.endGameTrains, 4000)
+        }
       } else {
         this.helpParameter.class = 'human' + humanId;
-        this.helpParameter.text = this.helpParameter.textList[humanId - 8].text
+        this.helpParameter.text = this.helpParameter.textList[humanId - 8].text;
         this.helpParameter.show = true;
       }
+    },
+    endGameTrains(){
+      this.$emit('end-game-train');
     }
   }
 }
@@ -194,7 +212,7 @@ export default {
     @include w-from($screen-lg) {
       width:           100vw;
       height:          100vh;
-      background:      url("/assets/img/game/train/background2.svg") no-repeat bottom;
+      background:      url("/assets/img/game/train/background2_2.svg") no-repeat bottom;
       background-size: cover;
     }
   }
@@ -208,11 +226,77 @@ export default {
     }
   }
 
-  &__background-sm {
-    width:  100vw;
-    height: 100%;
+  &__train-container {
+    position: absolute;
+    right:    0;
+    bottom:   63.45%;
+    width:    100%;
+    overflow: hidden;
+
+    @include w-from($screen-lg) {
+      bottom: 35.8vw;
+    }
   }
 
+  &__train {
+    width: 100%;
 
+    img {
+      width: 175%;
+      @include w-from($screen-lg) {
+        width: 117.2vw;
+      }
+    }
+  }
+
+  &__passengers {
+    width: 100%;
+  }
+
+  &__train-with-passengers {
+    width:       67.4%;
+    height:      100%;
+    margin-left: auto;
+
+    @include w-from($screen-lg) {
+      bottom: 35.8vw;
+      width:  67.1vw;
+    }
+  }
+
+  &__trees {
+    position: absolute;
+    left:     2.5%;
+    bottom:   63.4%;
+    width:    81%;
+
+    @include w-from($screen-lg) {
+      bottom: 35.8vw;
+      width:  81vw;
+    }
+  }
+
+}
+
+.train-enter-active, .train-leave-active {
+  transition: color 7s;
+
+  .train__train,
+  .train__passenger {
+    transition: transform 7s ease-in;
+  }
+}
+
+.train-enter, .train-leave-to {
+  color: white;
+
+  .train__train,
+  .train__passenger {
+    transform: translateX(-2100px);
+
+    @include w-from($screen-lg){
+      transform: translateX(-180vw);
+    }
+  }
 }
 </style>

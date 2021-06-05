@@ -3,10 +3,17 @@
     .game__text(
       :class="{'t-with-image': image}"
     )
-      p(
+      template(
         v-for="paragraph in textList"
-        :key="paragraph.id"
-      ) {{paragraph.text}}
+      )
+        TypoH2Bold(
+          v-if="paragraph.isTitle"
+          :key="paragraph.id"
+        ) Что же можно сделать?
+        p(
+          v-if="!paragraph.isTitle"
+          :key="paragraph.id"
+        ) {{paragraph.text}}
       img(
         v-if="image"
         :src="image"

@@ -30,20 +30,21 @@ export default {
   &__passenger {
     position: absolute;
     width:    2.4%;
-    bottom:   76.45%;
+    bottom:   52.3%;
+    z-index: 100;
 
     @include w-from($screen-lg) {
       width:  2.36vw;
-      bottom: 43vw;
+      bottom: 7.3vw;
     }
 
     &.m-2{
       width:  1.85%;
-      bottom: 78.75%;
+      bottom: 61.4%;
 
       @include w-from($screen-lg) {
         width:  1.8vw;
-        bottom: 44.4vw;
+        bottom: 8.5vw;
       }
     }
   }
