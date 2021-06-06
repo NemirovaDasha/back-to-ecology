@@ -19,16 +19,23 @@
         :src="image"
       )
 
-    button.button.game__button.t-blue(
-      v-if="isButton"
-      type="button"
-      @click="clickButton"
-    ) {{linkText}}
-    button.t-link1.game__link(
-      v-else
-      type="button"
-      @click="addStep"
-    ) {{linkText}}
+    .game__buttons-container
+      button.button.game__button.t-blue(
+        v-if="isButton"
+        type="button"
+        @click="clickButton"
+      ) {{linkText}}
+      button.t-link1.t-orange.game__link(
+        v-if="isBackButton"
+        type="button"
+        @click="deleteStep"
+      ) Назад
+      button.t-link1.game__link(
+        v-if="!isButton"
+        type="button"
+        @click="addStep"
+      ) {{linkText}}
+
 </template>
 
 <script>
@@ -53,13 +60,20 @@ export default {
     clickFunction: {
       type: String,
       require: false
+    },
+    isBackButton: {
+      type: Boolean,
+      require: false
     }
   },
   methods: {
     addStep() {
       this.$emit('show-next-step')
     },
-    clickButton(){
+    deleteStep() {
+      this.$emit('show-previous-step')
+    },
+    clickButton() {
       this.$emit(this.clickFunction)
     }
   }
@@ -87,6 +101,10 @@ export default {
     box-shadow:      3px 5px 14px rgba(0, 0, 0, 0.25);
     border-radius:   30px;
     box-sizing:      border-box;
+
+    @include w-from($screen-md) {
+      top: 30%;
+    }
 
     @include w-from($screen-lg) {
       top:       70px;
@@ -156,6 +174,14 @@ export default {
         box-sizing:    border-box;
       }
     }
+  }
+
+  &__buttons-container {
+    display:         flex;
+    width:           100%;
+    flex-direction:  row;
+    align-items:     center;
+    justify-content: space-around;
   }
 }
 </style>

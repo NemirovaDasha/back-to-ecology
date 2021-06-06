@@ -1,7 +1,7 @@
 <template lang="pug">
   .house__background
     .house__trees
-      img(src="assets/img/game/house/trees/tree1.svg")
+      img(src="assets/img/game/house/trees/tree1_1.svg")
       img(src="assets/img/game/house/trees/tree2.svg")
       img(src="assets/img/game/house/trees/tree3.svg")
 
@@ -32,10 +32,11 @@ export default {}
 
       &:first-child {
         left:       0;
-        bottom:     -2vw;
+        //bottom:     -2vw;
+        bottom:     0;
         height:     65vw;
         max-height: 109vh;
-        transform:  translateX(-53%);
+        //transform:  translateX(-53%);
       }
 
       &:nth-child(2) {

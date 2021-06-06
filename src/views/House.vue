@@ -1,10 +1,12 @@
 <template lang="pug">
-  main.main
+  main.main.house.js-no-overflow
     HouseInfo(
       :end-game="endGame"
+      @rotate-bin="rotateBin=true"
     )
     HouseBackground
     HouseTrash(
+      :rotate-bin="rotateBin"
       @end-game="endGame=true"
     )
 
@@ -22,12 +24,30 @@ export default {
   components: {HouseTrash, HouseBackground, HouseInfo},
   data() {
     return {
-      endGame: false
+      endGame: false,
+      rotateBin: false
     }
+  },
+  methods: {
+    init() {
+      document.body.classList.add('no-overflow');
+    }
+  },
+  mounted() {
+    this.init();
   }
 }
 </script>
 
 <style lang="scss">
+.house {
+  height:     100vh;
+  overflow-y: hidden;
+  position:   relative;
 
+  @include w-to($screen-lg) {
+    min-height: 515px;
+    overflow-y: auto;
+  }
+}
 </style>

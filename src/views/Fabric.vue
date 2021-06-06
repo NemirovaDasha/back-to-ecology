@@ -14,7 +14,7 @@
     transition(name="fabric-game")
       FabricGameTrees(
         v-if="isGameTrees"
-        @end-game="isGameTreesEnd=true"
+        @end-game="endGameTrees"
       )
 
     img.fabric__background(src="assets/img/game/fabric/background.svg")
@@ -40,13 +40,26 @@ export default {
   methods: {
     redirectToMain() {
       router.push({name: "Game"})
+    },
+    init() {
+      document.body.classList.add('no-overflow');
+    },
+    endGameTrees() {
+      setTimeout(() => this.isGameTreesEnd = true, 5000)
     }
+  },
+  mounted() {
+    this.init();
   }
 }
 </script>
 
 <style lang="scss">
 .fabric {
+  height:     100vh;
+  min-height: 500px;
+  overflow: hidden;
+
   &__background {
     width:    100vw;
     position: absolute;

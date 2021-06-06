@@ -26,7 +26,16 @@
         p Перетягивай предметы мышкой.
 
     transition(name="house-text")
-      .house__text(v-if="endGame")
+      .house__text(v-if="endGame & showBlockId===2")
+        p Молодец! Ты правильно рассортировал весь мусор.
+        p Давай теперь узнаем как не допускать такой ситуации с мусором.
+        TypoGameButton(
+          @next-step="switchStep"
+          :click-function="'next-step'"
+        ) Что можно сделать?
+
+    transition(name="house-text")
+      .house__text(v-if="endGame & showBlockId===3")
         TypoH2Bold Что же можно сделать?
         p Не бросай мусор на улице, выкидывай только в специальные места.
         p Старайся использовать некоторые вещи повторно и находить им новое применение, а вместо одноразовых вещей использовать многоразовые.
@@ -51,6 +60,9 @@ export default {
   methods: {
     switchStep() {
       this.showBlockId += 1
+      if (this.showBlockId === 2) {
+        this.$emit('rotate-bin')
+      }
     }
   }
 }
@@ -111,6 +123,12 @@ export default {
 
     p {
       margin-bottom: 20px;
+
+      @include w-to($screen-lg) {
+        margin-bottom: 5px;
+        font-size:     15px;
+        line-height:   19px;
+      }
     }
   }
 }

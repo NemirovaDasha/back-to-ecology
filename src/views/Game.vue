@@ -9,7 +9,9 @@
           :image="nextStep.info.image"
           :is-button="false"
           :link-text="'Дальше'"
+          :is-back-button="nextStep.isBackButton"
           @show-next-step="switchStep"
+          @show-previous-step="previousStep"
           :key="step"
         )
 
@@ -20,6 +22,7 @@
           :image="miniGameStates[miniGameIndex].gameItems[stepMiniGame].image"
           :is-button="false"
           :link-text="miniGameStates[miniGameIndex].gameItems[stepMiniGame].linkText"
+          :is-back-button="true"
           @show-next-step="nextStepMiniGame"
           :key="stepMiniGame"
         )
@@ -28,6 +31,7 @@
         :background-id="nextStep.background.mainImageId"
         :show-item-id="nextStep.background.addElementId"
         :key="nextStep.background.addElementId"
+        :is-previous-step="isPreviousStep"
         @start-game-train="startGameTrain"
         @start-game-car="startGameCar"
       )
@@ -65,7 +69,8 @@ export default {
           background: {
             mainImageId: 1,
             addElementId: 0
-          }
+          },
+          isBackButton: false
         },
         {
           info: {
@@ -80,7 +85,8 @@ export default {
           background: {
             mainImageId: 1,
             addElementId: 0
-          }
+          },
+          isBackButton: true
         },
         {
           info: {
@@ -90,12 +96,13 @@ export default {
                 text: 'Раньше на производствах трудилось много рабочих. Люди стали придумывать способы, которые помогали бы быстрее и лучше работать. Тогда изобрели первый паровой двигатель, стало появляться больше производств, а также первые паровозы '
               }
             ],
-            image: ''
+            image: 'assets/img/game/main/train.svg'
           },
           background: {
             mainImageId: 2,
             addElementId: 1
-          }
+          },
+          isBackButton: true
         },
         {
           info: {
@@ -110,7 +117,8 @@ export default {
           background: {
             mainImageId: 2,
             addElementId: 1
-          }
+          },
+          isBackButton: true
         },
         {
           info: {
@@ -120,12 +128,13 @@ export default {
                 text: 'Ученые изучали все вокруг и делали много открытий. Появилось электричество, стали строить много железных дорог и даже изобрели первые машины'
               }
             ],
-            image: ''
+            image: 'assets/img/game/main/car.svg'
           },
           background: {
             mainImageId: 2,
             addElementId: 2
-          }
+          },
+          isBackButton: true
         },
         {
           info: {
@@ -140,7 +149,8 @@ export default {
           background: {
             mainImageId: 2,
             addElementId: 2
-          }
+          },
+          isBackButton: true
         },
         {
           info: {
@@ -155,7 +165,8 @@ export default {
           background: {
             mainImageId: 3,
             addElementId: 3
-          }
+          },
+          isBackButton: true
         },
         {
           info: {
@@ -170,10 +181,12 @@ export default {
           background: {
             mainImageId: 3,
             addElementId: 3
-          }
+          },
+          isBackButton: true
         }
       ],
       step: 0,
+      isPreviousStep: false,
       isMiniGame: false,
       miniGameIndex: 0,
       stepMiniGame: 0,
@@ -249,6 +262,12 @@ export default {
   methods: {
     switchStep() {
       this.step = this.step + 1;
+      this.isPreviousStep = false;
+      localStorage.step = this.step;
+    },
+    previousStep() {
+      this.step = this.step - 1;
+      this.isPreviousStep = true;
       localStorage.step = this.step;
     },
     startAgain() {

@@ -3,9 +3,9 @@
     .game__image-container
       transition(name='game-images' appear)
         .game__train-container(
-          v-show="showItemId>0"
+          v-show="itemId>0"
           key="1"
-          :class="{'show-animation': showItemId===1}"
+          :class="{'show-animation': showItemId===1 & !isPreviousStep, 'hide-animation':  isPreviousStep}"
         )
           .game__smoke-container
             img.game__smoke2(src="assets/img/game/main/smoke/smoke3.svg")
@@ -18,9 +18,9 @@
 
       transition(name='game-images' appear)
         .game__fabric-container(
-          v-show="showItemId>0"
+          v-show="itemId>0"
           key="2"
-          :class="{'show-animation': showItemId===1}"
+          :class="{'show-animation': showItemId===1 & !isPreviousStep, 'hide-animation':  isPreviousStep}"
         )
           .game__smoke-container.m-fabric1
             img.game__smoke3(src="assets/img/game/main/smoke/smoke3.svg")
@@ -39,9 +39,9 @@
 
       transition(name='game-images' appear)
         .game__car-container(
-          v-show="showItemId>1"
+          v-show="itemId>1"
           key="3"
-          :class="{'show-animation': showItemId===2}"
+          :class="{'show-animation': showItemId===2 & !isPreviousStep, 'hide-animation':  isPreviousStep}"
         )
           button.game__image-button(
             type="button"
@@ -52,36 +52,36 @@
       .game__house-container
         transition(name='game-houses' appear)
           .game__house1-container(
-            v-if="showItemId>2"
+            v-if="itemId>2"
             key="4"
-            :class="{'show-animation': showItemId===3}"
+            :class="{'show-animation': showItemId===3 & !isPreviousStep, 'hide-animation':  isPreviousStep}"
           )
             router-link.game__image-button(:to="{name: 'House'}")
               img.game__house1(src="assets/img/game/main/house1.svg")
 
         transition(name='game-houses' appear)
           .game__house2-container(
-            v-if="showItemId>2"
+            v-if="itemId>2"
             key="4"
-            :class="{'show-animation': showItemId===3}"
+            :class="{'show-animation': showItemId===3 & !isPreviousStep, 'hide-animation':  isPreviousStep}"
           )
             router-link.game__image-button(:to="{name: 'House'}")
               img.game__house2(src="assets/img/game/main/house2.svg")
 
         transition(name='game-houses' appear)
           .game__house3-container(
-            v-if="showItemId>2"
+            v-if="itemId>2"
             key="4"
-            :class="{'show-animation': showItemId===3}"
+            :class="{'show-animation': showItemId===3 & !isPreviousStep, 'hide-animation':  isPreviousStep}"
           )
             router-link.game__image-button(:to="{name: 'House'}")
               img.game__house3(src="assets/img/game/main/house3.svg")
 
         transition(name='game-houses' appear)
           .game__houses-container(
-            v-if="showItemId>2"
+            v-if="itemId>2"
             key="4"
-            :class="{'show-animation': showItemId===3}"
+            :class="{'show-animation': showItemId===3  & !isPreviousStep, 'hide-animation':  isPreviousStep}"
           )
             img.game__houses(src="assets/img/game/main/houses.svg")
 
@@ -115,7 +115,29 @@ export default {
     showItemId: {
       type: Number,
       require: true
+    },
+    isPreviousStep: {
+      type: Boolean,
+      require: false
     }
+  },
+  data() {
+    return {
+      itemId: 0
+    }
+  },
+  methods: {
+    initBack() {
+      if (this.isPreviousStep) {
+        this.itemId = this.showItemId + 1;
+        setTimeout(()=>this.itemId -= 1, 1)
+      } else {
+        this.itemId = this.showItemId;
+      }
+    }
+  },
+  mounted() {
+    this.initBack();
   }
 }
 </script>
@@ -164,11 +186,13 @@ export default {
     background-size: contain;
 
     &.m-second {
-      background: url("/assets/img/game/back2.svg") no-repeat bottom;
+      background:      url("/assets/img/game/back2.svg") no-repeat bottom;
+      background-size: contain;
     }
 
     &.m-third {
-      background: url("/assets/img/game/back3.svg") no-repeat bottom;
+      background:      url("/assets/img/game/back3.svg") no-repeat bottom;
+      background-size: contain;
     }
   }
 
@@ -309,13 +333,35 @@ export default {
   }
 }
 
-.game-houses-enter-active {
-  transition: opacity 1s;
-  z-index:    1000;
+.game-images-leave-active {
+  &.hide-animation {
+    animation: game-images-in 0.5s reverse;
+    z-index:   1000;
+  }
 }
 
-.game-houses-enter {
-  opacity: 0.3;
+.game-houses-enter-active{
+  &.show-animation {
+    transition: opacity 1s;
+    z-index:    1000;
+  }
+}
+.game-houses-enter{
+  &.show-animation {
+    opacity: 0;
+  }
+}
+
+.game-houses-leave-active{
+  &.hide-animation {
+    transition: opacity 1s;
+    z-index:    1000;
+  }
+}
+.game-houses-leave-to {
+  &.hide-animation {
+    opacity: 0;
+  }
 }
 
 .game-back-enter-active {

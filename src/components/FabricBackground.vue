@@ -28,7 +28,7 @@ export default {}
   height:   100vh;
 
   &__container {
-    position:       fixed;
+    position:       absolute;
     top:            0;
     bottom:         0;
     left:           0;

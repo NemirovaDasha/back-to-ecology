@@ -3,7 +3,7 @@
     :class="humanParameter.class"
     @click="clickHuman"
   )
-    img(
+    img.train__human-image(
       :id="humanParameter.id"
       :name="humanType"
       :src="humanParameter.src"
@@ -39,8 +39,10 @@ export default {
 <style lang="scss">
 .train {
   &__human-button {
-    position: absolute;
-    z-index:  100;
+    position:   absolute;
+    z-index:    100;
+    opacity:    1;
+    transition: opacity .5s;
 
     > img {
       width:  100%;

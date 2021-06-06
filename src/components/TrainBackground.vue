@@ -8,6 +8,11 @@
       @click-human="checkPassenger"
     )
 
+    TrainBackgroundCloud(
+      :position-class="currentHuman"
+      :show-cloud="showCloud"
+    )
+
     BaseGameHelp(
       v-if="helpParameter.show"
       :class="helpParameter.class"
@@ -21,7 +26,7 @@
           :key="1"
         )
           .train__passengers
-            TrainBackgroundPassenger.mod-hidden(
+            TrainBackgroundPassenger.mod-hide(
               v-for="passenger in passengerList"
               :key="passenger.id"
               :passenger-parameter="passenger"
@@ -39,9 +44,10 @@
 import TrainBackgroundHuman from "./TrainBackgroundHuman";
 import TrainBackgroundPassenger from "./TrainBackgroundPassenger";
 import BaseGameHelp from "./BaseGameHelp";
+import TrainBackgroundCloud from "./TrainBackgroundCloud";
 
 export default {
-  components: {BaseGameHelp, TrainBackgroundPassenger, TrainBackgroundHuman},
+  components: {TrainBackgroundCloud, BaseGameHelp, TrainBackgroundPassenger, TrainBackgroundHuman},
   data() {
     return {
       humansList: [
@@ -174,19 +180,24 @@ export default {
           }
         ]
       },
-      gameCounter: 0
+      gameCounter: 0,
+      currentHuman: 'human1',
+      showCloud: false
     }
   },
   methods: {
     checkPassenger(human) {
       const humanId = human.id.split('-')[1];
       if (human.name === "passenger") {
+        this.currentHuman = 'human' + humanId;
+        this.showCloud = true;
+        setTimeout(() => this.showCloud = false, 1000);
         const passenger = document.getElementById('passenger-' + humanId);
-        passenger.classList.remove('mod-hidden');
-        human.classList.add('mod-hidden');
+        passenger.classList.remove('mod-hide');
+        human.classList.add('mod-hide');
         this.gameCounter += 1;
 
-        if (this.gameCounter===7){
+        if (this.gameCounter === 7) {
           setTimeout(this.endGameTrains, 4000)
         }
       } else {
@@ -195,7 +206,7 @@ export default {
         this.helpParameter.show = true;
       }
     },
-    endGameTrains(){
+    endGameTrains() {
       this.$emit('end-game-train');
     }
   }
@@ -294,7 +305,7 @@ export default {
   .train__passenger {
     transform: translateX(-2100px);
 
-    @include w-from($screen-lg){
+    @include w-from($screen-lg) {
       transform: translateX(-180vw);
     }
   }

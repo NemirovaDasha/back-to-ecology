@@ -5,8 +5,8 @@
 
 <script>
 export default {
-  props:{
-    href:{
+  props: {
+    href: {
       type: Object,
       require: true
     }
@@ -23,6 +23,13 @@ export default {
 
   @include hover {
     color: $color-orange;
+  }
+
+  &.t-orange {
+    color: $color-orange;
+    @include hover {
+      color: $color-blue;
+    }
   }
 
   @include w-from($screen-lg) {

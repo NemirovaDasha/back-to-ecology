@@ -90,6 +90,17 @@ export default {
       margin-bottom: 20px;
     }
 
+    @include w-from($screen-md) {
+      max-width: 58vw;
+      padding:   30px 0 0 16px;
+
+      p {
+        font-size:   14px;
+        line-height: 18px;
+        margin-bottom: 10px;
+      }
+    }
+
     @include w-from($screen-lg) {
       max-width: 58vw;
       padding:   30px 0 0 50px;
@@ -97,7 +108,6 @@ export default {
       p {
         font-size:     18px;
         line-height:   24px;
-        margin-bottom: 10px;
       }
     }
 

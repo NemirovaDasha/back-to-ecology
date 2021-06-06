@@ -174,7 +174,7 @@ export default {
 
 <style lang="scss">
 .game-trees {
-  position:       fixed;
+  position:       absolute;
   top:            0;
   bottom:         0;
   left:           0;
@@ -196,12 +196,12 @@ export default {
     box-sizing:      border-box;
     transform:       translatey(-50%);
     z-index:         100;
+    pointer-events:  auto;
 
     @include w-from($screen-md) {
       padding:   0 150px;
-      top:       30%;
+      top:       20%;
       transform: translatey(0);
-
     }
 
     @include w-from($screen-lg) {
@@ -322,13 +322,18 @@ export default {
   }
 
   &__holes {
-    width: 100%;
+    position:       relative;
+    width:          100%;
+    height:         100vh;
+    min-height:     500px;
+    pointer-events: none;
   }
 
   &__hole-container {
-    position: absolute;
-    width:    6vw;
-    z-index:  100;
+    position:       absolute;
+    pointer-events: auto;
+    width:          6vw;
+    z-index:        100;
 
     &:after {
       content:  '';

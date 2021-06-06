@@ -15,8 +15,8 @@ export default {
       require: false
     }
   },
-  computed:{
-    passengerPosition(){
+  computed: {
+    passengerPosition() {
       return {
         'right': this.passengerParameter.position.right
       }
@@ -28,17 +28,19 @@ export default {
 <style lang="scss">
 .train {
   &__passenger {
-    position: absolute;
-    width:    2.4%;
-    bottom:   52.3%;
-    z-index: 100;
+    position:   absolute;
+    width:      2.4%;
+    bottom:     52.3%;
+    z-index:    100;
+    opacity:    1;
+    transition: opacity 0.5s;
 
     @include w-from($screen-lg) {
       width:  2.36vw;
       bottom: 7.3vw;
     }
 
-    &.m-2{
+    &.m-2 {
       width:  1.85%;
       bottom: 61.4%;
 

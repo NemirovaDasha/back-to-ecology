@@ -9,10 +9,11 @@ export default {}
 
 <style lang="scss">
 .t-h2-bold {
-  font-size:   18px;
-  line-height: 24px;
-  text-align:  center;
-  width:       100%;
+  font-size:     18px;
+  line-height:   24px;
+  text-align:    center;
+  width:         100%;
+  margin-bottom: 10px;
 
   @include w-from($screen-lg) {
     font-size:   22px;

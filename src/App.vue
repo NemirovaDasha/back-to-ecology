@@ -390,6 +390,11 @@ a, p {
   }
 }
 
+.mod-hide {
+  opacity:    0 !important;
+  transition: opacity .5s;
+}
+
 .game-transition-enter-active, .game-transition-leave-active {
   transition: opacity .5s;
 }

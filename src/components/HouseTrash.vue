@@ -6,13 +6,17 @@
         :key="bin.id"
         :id="bin.type"
         :src="bin.image"
+        :class="bin.type"
         @dragover.prevent
         @drop.prevent="drop"
       )
     .house__shadows
       img(src="assets/img/game/house/bins/shadow1.svg")
       img(src="assets/img/game/house/bins/shadow1.svg")
-      img(src="assets/img/game/house/bins/shadow2.svg")
+      img(
+        src="assets/img/game/house/bins/shadow1.svg"
+        :class="{'m-rotate':isBinRotate}"
+      )
 
     .house__trash
       img(
@@ -38,6 +42,12 @@ import BaseGameHelp from "./BaseGameHelp";
 
 export default {
   components: {BaseGameHelp},
+  props: {
+    rotateBin: {
+      type: Boolean,
+      require: false
+    }
+  },
   data() {
     return {
       trashList: [
@@ -69,7 +79,8 @@ export default {
           image: 'assets/img/game/house/trash/can.svg',
           position: 'right: 35%; ' +
               'bottom: 5vw; ' +
-              'width: 6vw;',
+              'width: 6vw; ' +
+              'transform: scale(-1, 1) rotate(-17deg);',
           type: 'metal'
         },
         {
@@ -77,8 +88,7 @@ export default {
           image: 'assets/img/game/house/trash/can.svg',
           position: 'left: 34%; ' +
               'bottom: 6vw; ' +
-              'width: 6vw;' +
-              'transform: scale(-1, 1) rotate(-17deg);',
+              'width: 6vw;',
           type: 'metal'
         },
         {
@@ -86,8 +96,7 @@ export default {
           image: 'assets/img/game/house/trash/can.svg',
           position: 'right: 10%; ' +
               'bottom: 0; ' +
-              'width: 6vw;' +
-              'transform: scale(-1, 1) rotate(-17deg);',
+              'width: 6vw;',
           type: 'metal'
         },
         {
@@ -149,7 +158,7 @@ export default {
         {
           id: 2,
           image: 'assets/img/game/house/bins/metal.svg',
-          type: 'metal'
+          type: 'metal',
         },
         {
           id: 3,
@@ -196,7 +205,6 @@ export default {
         const trashImage = document.getElementById(trashName);
         trashImage.classList.add('mod-hidden');
         this.gameCounter = this.gameCounter + 1;
-        console.log(this.gameCounter);
       } else {
         this.helpParameter.show = true;
         this.helpParameter.position = this.trashList[trashId - 1].position;
@@ -224,6 +232,17 @@ export default {
       const target = e.target;
       e.dataTransfer.setData('trash_name', target.id)
     }
+  },
+  computed: {
+    isBinRotate() {
+      if (this.rotateBin) {
+        const paperBin = document.getElementById('paper');
+        paperBin.classList.add('m-rotate');
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
 }
 </script>
@@ -237,18 +256,27 @@ export default {
       height:   16vw;
       z-index:  1000;
 
-      &:first-child {
+      &.plastic {
         left: 32vw;
       }
 
-      &:nth-child(2) {
+      &.metal {
         left: 44vw;
       }
 
-      &:last-child {
-        width:  16vw;
-        left:   56vw;
-        bottom: 10vw;
+      &.paper {
+        width:      16vw;
+        height:     auto;
+        left:       56vw;
+        bottom:     13vw;
+        transition: all 1s;
+
+        &.m-rotate {
+          bottom:     16.7vw;
+          left:       53.5vw;
+          transform:  rotate(-90deg);
+          transition: all 1s;
+        }
       }
     }
   }
@@ -269,10 +297,18 @@ export default {
       }
 
       &:last-child {
-        width:   18vw;
-        left:    55vw;
-        bottom:  11.5vw;
-        z-index: 100;
+        width:      18vw;
+        left:       55vw;
+        bottom:     11.5vw;
+        z-index:    100;
+        transition: all 1s;
+      }
+
+      &.m-rotate {
+        width:      16vw;
+        bottom:     13vw;
+        left:       53vw;
+        transition: all 1s;
       }
     }
   }
