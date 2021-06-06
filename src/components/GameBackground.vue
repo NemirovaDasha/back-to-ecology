@@ -103,7 +103,6 @@
             v-if="backgroundId===3"
             src="assets/img/game/back3.svg"
           )
-
 </template>
 
 <script>

@@ -27,6 +27,16 @@ export default {}
   width:    100%;
   height:   100vh;
 
+  &__container {
+    position:       fixed;
+    top:            0;
+    bottom:         0;
+    left:           0;
+    right:          0;
+    z-index:        100;
+    pointer-events: none;
+  }
+
   &__hero {
     position: absolute;
     bottom:   0;
@@ -63,17 +73,17 @@ export default {}
   }
 
   &__smoke1 {
-    width: 6vw;
+    width:     6vw;
     animation: smoke1 3s infinite ease-in;
   }
 
   &__smoke2 {
-    width: 4.5vw;
+    width:     4.5vw;
     animation: smoke2 3s infinite ease-in;
   }
 
   &__smoke3 {
-    width: 3.8vw;
+    width:     3.8vw;
     animation: smoke3 3s infinite ease-in;
   }
 }

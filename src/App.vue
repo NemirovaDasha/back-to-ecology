@@ -390,6 +390,44 @@ a, p {
   }
 }
 
+.game-transition-enter-active, .game-transition-leave-active {
+  transition: opacity .5s;
+}
+
+.game-transition-enter, .game-transition-leave-to {
+  opacity: 0;
+}
+
+.base-text-enter-active {
+  animation: animationText 0.4s reverse linear;
+}
+
+.base-text-enter, .base-text-leave-to {
+  display: none;
+}
+
+.base-text-leave-active {
+  animation: animationText 0.4s linear;
+}
+
+@keyframes animationText {
+  0% {
+    opacity: 1;
+  }
+  49% {
+    opacity: 0;
+    display: block;
+  }
+  50% {
+    opacity: 0;
+    display: none;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
 
 @keyframes transformTree {
   0% {

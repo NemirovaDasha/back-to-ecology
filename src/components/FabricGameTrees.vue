@@ -11,65 +11,41 @@
         @dragover.stop
       )
     .game-trees__holes
-      img(
+      .game-trees__hole-container(
         v-for="hole in images"
         :key="hole.id"
         :id="'hole' + hole.id"
         :class="hole.holeClass"
-        src="assets/img/game/fabric/trees/hole.svg"
         @dragover.prevent
         @drop.prevent="drop"
       )
+        img(
+          src="assets/img/game/fabric/trees/hole.svg"
+        )
 
-    .game-trees__plants(v-if="plantsCounter!=11")
-      img.game-trees__plant.mod-hidden(
-        v-for="plant in images"
-        :key="plant.id"
-        :id="'plant' + plant.id"
-        :class="plant.holeClass"
-        src="assets/img/game/fabric/trees/plant.svg"
-      )
+    transition(name="game-transition")
+      .game-trees__plants(v-if="plantsCounter!=11")
+        img.game-trees__plant.mod-hidden(
+          v-for="plant in images"
+          :key="plant.id"
+          :id="'plant' + plant.id"
+          :class="plant.holeClass"
+          src="assets/img/game/fabric/trees/plant.svg"
+        )
 
-    .game-trees__trees(
-      v-if="plantsCounter===11"
-      key="1"
-    )
-      img(
-        src="assets/img/trees/tree1.svg"
-        style="left:0; bottom: 21vw; height: 25vw; transform: scale(-1, 1);"
+    transition(name="fabric-trees" appear)
+      .game-trees__trees-container(
+        v-if="plantsCounter===11"
+        key="1"
       )
-      img(
-        src="assets/img/trees/tree1.svg"
-        style="left:39.5vw; bottom: 16vw; height: 33.5vw;"
-      )
-      img(
-        src="assets/img/trees/tree1.svg"
-        style="right:0.5vw; bottom: -1vw; height: 36vw; z-index:1002; transform: scale(-1, 1);"
-      )
-      img(
-        src="assets/img/trees/tree2.svg"
-        style="left:-6vw; bottom: -3vw; height: 38vw; z-index:1001"
-      )
-      img(
-        src="assets/img/trees/tree2.svg"
-        style="right: 24vw; bottom: 7vw; height: 26vw; z-index:1001"
-      )
-      img(
-        src="assets/img/trees/tree2.svg"
-        style="right: -1vw; bottom: 21vw; height: 18vw;"
-      )
-      img(
-        src="assets/img/trees/tree2.svg"
-        style="left: 26vw; bottom: 26vw; height: 18vw;"
-      )
-      img(
-        src="assets/img/trees/tree5.svg"
-        style="left: 15vw; bottom: 3vw; height: 32vw;"
-      )
-      img(
-        src="assets/img/trees/tree5.svg"
-        style="right: 11vw; bottom: 10vw; height: 32vw;"
-      )
+        .game-trees__tree-box(
+          v-for="tree in trees"
+          :key="tree.id"
+          :class="tree.class"
+        )
+          img.game-trees__tree(
+            :src="tree.src"
+          )
 </template>
 
 <script>
@@ -79,48 +55,95 @@ export default {
       images: [
         {
           id: 1,
-          holeClass: 'game-trees__hole1'
+          holeClass: 'hole1'
         },
         {
           id: 2,
-          holeClass: 'game-trees__hole2'
+          holeClass: 'hole2'
         },
         {
           id: 3,
-          holeClass: 'game-trees__hole3'
+          holeClass: 'hole3'
         },
         {
           id: 4,
-          holeClass: 'game-trees__hole4'
+          holeClass: 'hole4'
         },
         {
           id: 5,
-          holeClass: 'game-trees__hole5'
+          holeClass: 'hole5'
         },
         {
           id: 6,
-          holeClass: 'game-trees__hole6'
+          holeClass: 'hole6'
         },
         {
           id: 7,
-          holeClass: 'game-trees__hole7'
+          holeClass: 'hole7'
         },
         {
           id: 8,
-          holeClass: 'game-trees__hole8'
+          holeClass: 'hole8'
         },
         {
           id: 9,
-          holeClass: 'game-trees__hole9'
+          holeClass: 'hole9'
         },
         {
           id: 10,
-          holeClass: 'game-trees__hole10'
+          holeClass: 'hole10'
         },
         {
           id: 11,
-          holeClass: 'game-trees__hole11'
+          holeClass: 'hole11'
         },
+      ],
+      trees: [
+        {
+          id: 'tree1',
+          src: 'assets/img/trees/tree1.svg',
+          class: 'tree1'
+        },
+        {
+          id: 'tree2',
+          src: 'assets/img/trees/tree1.svg',
+          class: 'tree2'
+        },
+        {
+          id: 'tree3',
+          src: 'assets/img/trees/tree1.svg',
+          class: 'tree3'
+        },
+        {
+          id: 'tree4',
+          src: 'assets/img/trees/tree2.svg',
+          class: 'tree4'
+        },
+        {
+          id: 'tree5',
+          src: 'assets/img/trees/tree2.svg',
+          class: 'tree5'
+        },
+        {
+          id: 'tree6',
+          src: 'assets/img/trees/tree2.svg',
+          class: 'tree6'
+        },
+        {
+          id: 'tree7',
+          src: 'assets/img/trees/tree2.svg',
+          class: 'tree7'
+        },
+        {
+          id: 'tree8',
+          src: 'assets/img/trees/tree5.svg',
+          class: 'tree8'
+        },
+        {
+          id: 'tree9',
+          src: 'assets/img/trees/tree5.svg',
+          class: 'tree9'
+        }
       ],
       plantsCounter: 0
     }
@@ -137,7 +160,7 @@ export default {
       plant.classList.remove('mod-hidden');
       this.plantsCounter = this.plantsCounter + 1;
 
-      if (this.plantsCounter===11){
+      if (this.plantsCounter === 11) {
         this.$emit('end-game')
       }
     },
@@ -151,6 +174,14 @@ export default {
 
 <style lang="scss">
 .game-trees {
+  position:       fixed;
+  top:            0;
+  bottom:         0;
+  left:           0;
+  right:          0;
+  z-index:        100;
+  pointer-events: none;
+
   &__seeds {
     position:        absolute;
     right:           0;
@@ -197,14 +228,90 @@ export default {
     }
   }
 
-  &__trees {
-    img {
-      position: absolute;
-      z-index:  1000;
+  &__tree-box {
+    position:        absolute;
+    z-index:         1000;
+    display:         flex;
+    flex-direction:  column;
+    align-items:     center;
+    justify-content: flex-end;
+
+    &.tree1 {
+      left:      0;
+      bottom:    21vw;
+      height:    25vw;
+      width:     16.6vw;
+      transform: scale(-1, 1);
+    }
+
+    &.tree2 {
+      left:   39.5vw;
+      bottom: 16vw;
+      height: 33.5vw;
+      width:  23vw;
+    }
+
+    &.tree3 {
+      right:     0.5vw;
+      bottom:    -1vw;
+      height:    36vw;
+      width:     24vw;
+      z-index:   1002;
+      transform: scale(-1, 1);
+    }
+
+    &.tree4 {
+      left:    -6vw;
+      bottom:  -3vw;
+      height:  38vw;
+      width:   29vw;
+      z-index: 1001
+    }
+
+    &.tree5 {
+      right:   24vw;
+      bottom:  7vw;
+      height:  26vw;
+      width:   20vw;
+      z-index: 1001
+    }
+
+    &.tree6 {
+      right:  -3vw;
+      bottom: 21vw;
+      height: 18vw;
+      width:  14vw;
+    }
+
+    &.tree7 {
+      left:    26vw;
+      bottom:  26vw;
+      height:  18vw;
+      width:   13.8vw;
+      z-index: 999;
+    }
+
+    &.tree8 {
+      left:   15vw;
+      bottom: 3vw;
+      height: 32vw;
+      width:  23vw;
+    }
+
+    &.tree9 {
+      right:  11vw;
+      bottom: 10vw;
+      height: 32vw;
+      width:  23vw;
     }
   }
 
-  &__holes, &__plants {
+  &__tree {
+    height: 100%;
+    width:  auto;
+  }
+
+  &__plants {
     width: 100%;
 
     img {
@@ -214,59 +321,99 @@ export default {
     }
   }
 
-  &__hole1 {
+  &__holes {
+    width: 100%;
+  }
+
+  &__hole-container {
+    position: absolute;
+    width:    6vw;
+    z-index:  100;
+
+    &:after {
+      content:  '';
+      position: absolute;
+      top:      -2vw;
+      bottom:   -2vw;
+      right:    -2vw;
+      left:     -2vw;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .hole1 {
     left:   2vw;
     bottom: 9vw;
   }
 
-  &__hole2 {
+  .hole2 {
     left:   23vw;
     bottom: 4vw;
   }
 
-  &__hole3 {
+  .hole3 {
     left:   7vw;
     bottom: 20vw;
   }
 
-  &__hole4 {
+  .hole4 {
     left:   28vw;
     bottom: 25vw;
   }
 
-  &__hole5 {
+  .hole5 {
     right:  26vw;
     bottom: 27vw;
   }
 
-  &__hole6 {
+  .hole6 {
     right:  4vw;
     bottom: 21vw;
   }
 
-  &__hole7 {
+  .hole7 {
     left:   44vw;
     bottom: 17vw;
   }
 
-  &__hole8 {
+  .hole8 {
     right:  33vw;
     bottom: 20vw;
   }
 
-  &__hole9 {
+  .hole9 {
     right:  16vw;
     bottom: 13vw;
   }
 
-  &__hole10 {
+  .hole10 {
     right:  34vw;
     bottom: 8vw;
   }
 
-  &__hole11 {
+  .hole11 {
     right:  4vw;
     bottom: 3vw;
+  }
+
+}
+
+.fabric-trees-enter-active {
+  transition: color 5s;
+
+  .game-trees__tree {
+    transition: height 5s;
+  }
+}
+
+.fabric-trees-enter {
+  color: white;
+
+  .game-trees__tree {
+    height: 0;
   }
 }
 </style>

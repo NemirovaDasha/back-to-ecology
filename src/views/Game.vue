@@ -309,13 +309,4 @@ export default {
     }
   }
 }
-
-.game-transition-enter-active, .game-transition-leave-active {
-  transition: opacity .5s;
-}
-
-.game-transition-enter, .game-transition-leave-to /* .fade-leave-active до версии 2.1.8 */
-{
-  opacity: 0;
-}
 </style>
