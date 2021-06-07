@@ -1,5 +1,6 @@
 <template lang="pug">
   main.main.fabric
+    BasePreloader
     FabricInfo(
       @start-game-trees="isGameTrees=true"
       @end-game-trees="redirectToMain"
@@ -28,9 +29,10 @@ import FabricInfo from "../components/FabricInfo";
 import FabricBackground from "../components/FabricBackground";
 import FabricGameTrees from "../components/FabricGameTrees";
 import router from "../router";
+import BasePreloader from "../components/BasePreloader";
 
 export default {
-  components: {FabricGameTrees, FabricBackground, FabricInfo},
+  components: {BasePreloader, FabricGameTrees, FabricBackground, FabricInfo},
   data() {
     return {
       isGameTrees: false,
@@ -57,8 +59,12 @@ export default {
 <style lang="scss">
 .fabric {
   height:     100vh;
-  min-height: 500px;
+  min-height: 650px;
   overflow: hidden;
+
+  @include w-from($screen-md){
+    min-height: 500px;
+  }
 
   &__background {
     width:    100vw;

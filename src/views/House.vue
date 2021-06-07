@@ -1,5 +1,6 @@
 <template lang="pug">
   main.main.house.js-no-overflow
+    BasePreloader
     HouseInfo(
       :end-game="endGame"
       @rotate-bin="rotateBin=true"
@@ -19,9 +20,10 @@
 import HouseInfo from "../components/HouseInfo";
 import HouseBackground from "../components/HouseBackground";
 import HouseTrash from "../components/HouseTrash";
+import BasePreloader from "../components/BasePreloader";
 
 export default {
-  components: {HouseTrash, HouseBackground, HouseInfo},
+  components: {BasePreloader, HouseTrash, HouseBackground, HouseInfo},
   data() {
     return {
       endGame: false,

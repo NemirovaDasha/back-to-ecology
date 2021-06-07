@@ -5,6 +5,7 @@
       :is-button="true"
       :link-text="blockTextList[idBlock].buttonText"
       :click-function="blockTextList[idBlock].functionButton"
+      :is-start-game-again="blockTextList[idBlock].isAgain"
       style="z-index: 2000;"
       @start-game="$emit('start-game')"
       @end-game="$emit('end-game')"
@@ -28,6 +29,7 @@ export default {
           id: 0,
           buttonText: 'Начать',
           functionButton: 'start-game',
+          isAgain: false,
           textList: [
             {
               id: 0,
@@ -47,6 +49,7 @@ export default {
           id: 1,
           buttonText: 'Закончить игру',
           functionButton: 'end-game',
+          isAgain: true,
           textList: [
             {
               id: 0,

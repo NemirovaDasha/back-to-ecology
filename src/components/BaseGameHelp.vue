@@ -21,6 +21,7 @@ export default {
 
 <style lang="scss">
 .help-message {
+  position:        absolute;
   width:           11% !important;
   min-width:       170px;
   height:          8% !important;
@@ -28,7 +29,6 @@ export default {
   text-align:      center;
   background:      url("/assets/img/game/help.svg") no-repeat;
   background-size: contain;
-  position:        absolute;
   z-index:         9000;
   transform:       none !important;
 
@@ -37,6 +37,15 @@ export default {
     max-width:  240px;
     height:     8vw !important;
     max-height: 120px;
+  }
+
+  &::after {
+    content:  "";
+    position: fixed;
+    top:      0;
+    bottom:   0;
+    left:     0;
+    right:    0;
   }
 
   p {

@@ -1,5 +1,6 @@
 <template lang="pug">
   main.main
+    BasePreloader
     CarInfo(
       v-if="!isGameCar"
       :id-block="idBlockShow"
@@ -23,9 +24,10 @@ import CarInfo from "../components/CarInfo";
 import router from "../router";
 import CarAuto from "../components/CarBackgroundAuto";
 import CarBackgroundAuto from "../components/CarBackgroundAuto";
+import BasePreloader from "../components/BasePreloader";
 
 export default {
-  components: {CarInfo, CarBackground},
+  components: {BasePreloader, CarInfo, CarBackground},
   data() {
     return {
       isGameCar: false,

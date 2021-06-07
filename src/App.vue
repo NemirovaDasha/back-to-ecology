@@ -1,6 +1,10 @@
 <template lang="pug">
   #app
-    RouterView
+    transition(
+      name="preloader"
+      mode="out-in"
+    )
+      RouterView
 </template>
 
 <script>
@@ -227,7 +231,6 @@ input::-webkit-clear-button {
   margin:             0;
 }
 
-
 //fonts
 @font-face {
   font-family: 'Anitype Redwood1';
@@ -242,7 +245,6 @@ input::-webkit-clear-button {
   font-weight: normal;
   font-style:  normal;
 }
-
 
 //services
 body {
@@ -279,8 +281,8 @@ main {
   font-family: $font-family-default;
 
   a {
-    color:       $color-blue;
-    transition:  color $transition-hover-off;
+    color:      $color-blue;
+    transition: color $transition-hover-off;
 
     @include hover() {
       color:      $color-orange;
@@ -334,6 +336,12 @@ main {
   }
 }
 
+.mod-no-lg {
+  @include w-from($screen-lg) {
+    display: none !important;
+  }
+}
+
 .mod-translate {
   @include w-to($screen-lg) {
     opacity:   0;
@@ -376,17 +384,17 @@ a, p {
 }
 
 .back-to-game {
-  left:  16px!important;
-  right: auto!important;
+  left:  16px !important;
+  right: auto !important;
 
   @include w-from($screen-md) {
-    right: 132px!important;
-    left:  auto!important;
+    right: 132px !important;
+    left:  auto !important;
   }
 
   @include w-from($screen-lg) {
-    right: 212px!important;
-    left:  auto!important;
+    right: 212px !important;
+    left:  auto !important;
   }
 }
 
@@ -497,4 +505,93 @@ a, p {
   }
 }
 
+.preloader-enter-active, .preloader-leave-active {
+  transition: opacity 1.5s ease-out;
+  //
+  //.main {
+  //  animation: mainAnimation 3s;
+  //}
+
+  .preloader {
+    display:   flex;
+    animation: preloaderOut 1.5s linear;
+  }
+
+  .preloader__icon {
+    animation: preloaderIn 1.5s linear;
+  }
+
+  .preloader__minute-hand {
+    animation:        clockHandAnimation 1s linear infinite;
+    transform-origin: bottom right;
+  }
+
+  .preloader__hour-hand {
+    animation:        clockHandAnimation 10s linear infinite;
+    transform-origin: bottom left;
+  }
+}
+
+.preloader-enter, .preloader-leave-to {
+  opacity: 0;
+}
+
+.preloader-enter-to, .preloader-leave {
+  opacity: 1;
+
+  .preloader {
+    display: none;
+  }
+}
+
+@keyframes clockHandAnimation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes mainAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes preloaderIn {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes preloaderOut {
+  0% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  99% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 </style>

@@ -195,6 +195,7 @@ export default {
         const passenger = document.getElementById('passenger-' + humanId);
         passenger.classList.remove('mod-hide');
         human.classList.add('mod-hide');
+        setTimeout(()=>human.style.display = 'none', 700);
         this.gameCounter += 1;
 
         if (this.gameCounter === 7) {

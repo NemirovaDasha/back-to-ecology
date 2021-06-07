@@ -19,5 +19,6 @@ export default {
 .things {
   padding-top: 20px;
   box-sizing:  border-box;
+  z-index:     2000;
 }
 </style>

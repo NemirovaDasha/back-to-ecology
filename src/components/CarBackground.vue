@@ -8,22 +8,6 @@
         :active-car-number="activeCarNumber"
       )
 
-    //.checkbox(
-    //  style="bottom: 42%; right: 4.7%"
-    //)
-    //  svg.checkbox__svg.m-wrong(
-    //    version="1.1"
-    //    xmlns="http://www.w3.org/2000/svg"
-    //    x="0px"
-    //    y="0px"
-    //    viewBox="0 0 100 100"
-    //    style="enable-background:new 0 0 100 100;"
-    //    xml:space="preserve"
-    //  )
-    //    polyline.checkbox__line.m-wrong-1(points="90.5,5.5 5.5,90.5")
-    //    polyline.checkbox__line.m-wrong-2(points="5.5,5.5 90.5,90.5")
-
-
     button.car__station(
       type="button"
       @click="checkType('electric')"

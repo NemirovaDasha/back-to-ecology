@@ -40,11 +40,18 @@
         p Не бросай мусор на улице, выкидывай только в специальные места.
         p Старайся использовать некоторые вещи повторно и находить им новое применение, а вместо одноразовых вещей использовать многоразовые.
         p Тогда будет меньше мусора, а вокруг будет чище.
+        button.t-link1.t-orange.game__link(
+          type="button"
+          @click="startAgain"
+          style="margin-right: 20px;"
+        ) Играть снова
         router-link.t-link1.game__link(:to="{name: 'Things'}") Как это сделать?
 
 </template>
 
 <script>
+import router from "../router";
+
 export default {
   data() {
     return {
@@ -63,6 +70,9 @@ export default {
       if (this.showBlockId === 2) {
         this.$emit('rotate-bin')
       }
+    },
+    startAgain(){
+      router.go(0)
     }
   }
 }

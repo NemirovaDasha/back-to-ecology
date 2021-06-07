@@ -3,7 +3,7 @@
     .game__image-container
       transition(name='game-images' appear)
         .game__train-container(
-          v-show="itemId>0"
+          v-show="itemId>0 & !isRules"
           key="1"
           :class="{'show-animation': showItemId===1 & !isPreviousStep, 'hide-animation':  isPreviousStep}"
         )
@@ -18,7 +18,7 @@
 
       transition(name='game-images' appear)
         .game__fabric-container(
-          v-show="itemId>0"
+          v-show="itemId>0 & !isRules"
           key="2"
           :class="{'show-animation': showItemId===1 & !isPreviousStep, 'hide-animation':  isPreviousStep}"
         )
@@ -49,6 +49,11 @@
           )
             img.game__car(src="assets/img/game/main/car.svg")
 
+
+      .game__car-rules(
+        v-if="isRules"
+        key="rulesImage"
+      )
       .game__house-container
         transition(name='game-houses' appear)
           .game__house1-container(
@@ -86,7 +91,9 @@
             img.game__houses(src="assets/img/game/main/houses.svg")
 
       transition(name='game-back')
-        .game__background-container
+        .game__background-container(
+          :class="{'m-rules': isRules}"
+        )
           img.game__back(
             v-if="backgroundId===1"
             src="assets/img/game/back.svg"
@@ -119,6 +126,10 @@ export default {
     isPreviousStep: {
       type: Boolean,
       require: false
+    },
+    isRules: {
+      type: Boolean,
+      require: false
     }
   },
   data() {
@@ -130,7 +141,7 @@ export default {
     initBack() {
       if (this.isPreviousStep) {
         this.itemId = this.showItemId + 1;
-        setTimeout(()=>this.itemId -= 1, 1)
+        setTimeout(() => this.itemId -= 1, 1)
       } else {
         this.itemId = this.showItemId;
       }
@@ -145,26 +156,52 @@ export default {
 <style lang="scss">
 .game {
   &__background {
-    position: absolute;
-    bottom:   0;
-    left:     0;
-    right:    0;
-    width:    100%;
-    height:   auto;
+    position:   absolute;
+    bottom:     0;
+    left:       0;
+    right:      0;
+    width:      100%;
+    height:     auto;
+    overflow-x: scroll;
+    overflow-y: visible;
+
+    @include w-from($screen-md) {
+      overflow: visible;
+    }
   }
 
   &__image-container {
-    width:    100%;
-    height:   100%;
-    position: relative;
+    position:   relative;
+    min-width:  310%;
+    width:      auto;
+    min-height: 30vh;
+    height:     100%;
+
+    @include w-from($screen-md) {
+      width:      100%;
+      min-width:  100%;
+      min-height: 100%;
+      height:     auto;
+    }
   }
 
   &__image-button {
     display: block;
     width:   100%;
+    height:  100%;
 
     img {
-      width: 100%;
+      width:  auto;
+      height: 100%;
+    }
+
+    @include w-from($screen-md) {
+      height: auto;
+
+      img {
+        width:  100%;
+        height: auto;
+      }
     }
 
     @include hover() {
@@ -182,6 +219,7 @@ export default {
 
   &__background-container {
     width:           100%;
+    margin-top:      0;
     background:      url("/assets/img/game/back.svg") no-repeat bottom;
     background-size: contain;
 
@@ -194,34 +232,88 @@ export default {
       background:      url("/assets/img/game/back3.svg") no-repeat bottom;
       background-size: contain;
     }
+
+    @include w-to($screen-md) {
+      margin-top: 5%;
+      img {
+        height: 100%;
+        width:  100%;
+      }
+
+      &.m-rules {
+        margin-bottom: -5%;
+      }
+    }
   }
 
   &__train-container {
     position: absolute;
-    top:      -1.4vw;
-    left:     4.5vw;
-    width:    9vw;
+    width:    auto;
+    height:   40%;
+    top:      -4%;
+    left:     55px;
     z-index:  100;
+
+    @include w-from($screen-md) {
+      top:    -1.4vw;
+      left:   4.5vw;
+      width:  9vw;
+      height: auto;
+    }
   }
 
   &__fabric-container {
     position: absolute;
-    top:      1.5vw;
-    right:    2.2vw;
-    width:    24vw;
+    top:      6%;
+    right:    1.4%;
+    width:    auto;
+    height:   34%;
     z-index:  100;
+
+    @include w-from($screen-md) {
+      top:    1.5vw;
+      right:  2.2vw;
+      width:  24vw;
+      height: auto;
+    }
   }
 
   &__car-container {
     position:  absolute;
-    bottom:    4vw;
-    right:     22.2vw;
-    width:     7.5vw;
+    bottom:    16%;
+    right:     21%;
+    width:     auto;
+    height:    20%;
     animation: moveTransport 2s infinite;
     z-index:   100;
 
     @include hover() {
       animation-play-state: paused;
+    }
+
+    @include w-from($screen-md) {
+      bottom: 4vw;
+      right:  22.2vw;
+      width:  7.5vw;
+      height: auto;
+    }
+  }
+
+  &__car-rules {
+    position:      absolute;
+    bottom:        13%;
+    right:         19.6%;
+    width:         10%;
+    height:        25%;
+    border:        solid 2px #F00;
+    border-radius: 50%;
+    z-index:       999;
+
+    @include w-from($screen-md) {
+      bottom: 3vw;
+      right:  21vw;
+      width:  9.5vw;
+      height: 27%;
     }
   }
 
@@ -231,24 +323,46 @@ export default {
 
   &__houses-container {
     position:       absolute;
-    left:           2vw;
-    bottom:         5vw;
-    width:          87vw;
+    left:           1.5%;
+    bottom:         21%;
+    width:          auto;
+    height:         101%;
     pointer-events: none;
     z-index:        100;
 
     img {
-      width: 100%;
+      width:  auto;
+      height: 100%;
+    }
+
+    @include w-from($screen-md) {
+      left:   2vw;
+      bottom: 5vw;
+      width:  87vw;
+      height: auto;
+
+      img {
+        width:  100%;
+        height: auto;
+      }
     }
   }
 
   &__house1-container {
     position:  absolute;
-    left:      22vw;
-    width:     10vw;
-    bottom:    17vw;
+    left:      21%;
+    bottom:    68%;
+    width:     auto;
+    height:    40%;
     animation: moveHouses 2s infinite;
     z-index:   100;
+
+    @include w-from($screen-md) {
+      left:   22vw;
+      bottom: 17vw;
+      width:  10vw;
+      height: auto;
+    }
 
     @include hover() {
       animation-play-state: paused;
@@ -257,27 +371,43 @@ export default {
 
   &__house2-container {
     position:  absolute;
-    bottom:    9vw;
-    right:     27.5vw;
-    width:     10.3vw;
+    right:     25.5%;
+    bottom:    42%;
+    width:     auto;
+    height:    45%;
     animation: moveHouses 2s infinite;
     z-index:   100;
 
     @include hover() {
       animation-play-state: paused;
     }
+
+    @include w-from($screen-md) {
+      bottom: 9vw;
+      right:  27.5vw;
+      width:  10.3vw;
+      height: auto;
+    }
   }
 
   &__house3-container {
     position:  absolute;
-    bottom:    7vw;
-    left:      10.6vw;
-    width:     5.3vw;
+    bottom:    28%;
+    left:      10.5%;
+    width:     auto;
+    height:    32%;
     animation: moveHouses 2s infinite;
     z-index:   100;
 
     @include hover() {
       animation-play-state: paused;
+    }
+
+    @include w-from($screen-md) {
+      bottom: 7vw;
+      left:   10.6vw;
+      width:  5.3vw;
+      height: auto;
     }
   }
 
@@ -286,43 +416,84 @@ export default {
     margin-left: 0.3vw;
 
     &.m-fabric1 {
-      margin-left: 12vw;
+      width:       33%;
+      margin-left: 50%;
     }
 
     &.m-fabric2 {
-      margin-left: 14.8vw;
+      width:       33%;
+      margin-left: 61%;
     }
 
     &.m-fabric3 {
-      margin-left: 17.5vw;
+      width:       33%;
+      margin-left: 73%;
+    }
+
+    @include w-from($screen-md) {
+      &.m-fabric1 {
+        width:       auto;
+        margin-left: 12vw;
+      }
+
+      &.m-fabric2 {
+        width:       auto;
+        margin-left: 14.8vw;
+      }
+
+      &.m-fabric3 {
+        width:       auto;
+        margin-left: 17.5vw;
+      }
     }
   }
 
   &__smoke1 {
     position:  absolute;
-    bottom:    0.5vw;
     left:      0;
-    width:     1.8vw;
+    bottom:    auto;
+    top:       -20px;
+    width:     20%;
     opacity:   0;
     animation: smoke1 3s infinite ease-in;
+
+    @include w-from($screen-md) {
+      bottom: 0.5vw;
+      top:    auto;
+      width:  1.8vw;
+    }
   }
 
   &__smoke2 {
     position:  absolute;
-    bottom:    2.3vw;
+    bottom:    auto;
+    top:       -40px;
     left:      0.1vw;
-    width:     1.4vw;
+    width:     15%;
     opacity:   0;
     animation: smoke2 3s infinite ease-in;
+
+    @include w-from($screen-md) {
+      bottom: 2.3vw;
+      top:    auto;
+      width:  1.4vw;
+    }
   }
 
   &__smoke3 {
     position:  absolute;
-    bottom:    4vw;
     left:      0.1vw;
-    width:     1.2vw;
+    bottom:    auto;
+    top:       -60px;
+    width:     13%;
     opacity:   0;
     animation: smoke3 3s infinite ease-in;
+
+    @include w-from($screen-md) {
+      bottom: 4vw;
+      top:    auto;
+      width:  1.2vw;
+    }
   }
 }
 
@@ -340,24 +511,26 @@ export default {
   }
 }
 
-.game-houses-enter-active{
+.game-houses-enter-active {
   &.show-animation {
     transition: opacity 1s;
     z-index:    1000;
   }
 }
-.game-houses-enter{
+
+.game-houses-enter {
   &.show-animation {
     opacity: 0;
   }
 }
 
-.game-houses-leave-active{
+.game-houses-leave-active {
   &.hide-animation {
     transition: opacity 1s;
     z-index:    1000;
   }
 }
+
 .game-houses-leave-to {
   &.hide-animation {
     opacity: 0;
@@ -394,7 +567,7 @@ export default {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.01);
+    transform: scale(1.03);
   }
   100% {
     transform: scale(1);

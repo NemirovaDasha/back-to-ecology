@@ -13,6 +13,7 @@
         p(
           v-if="!paragraph.isTitle"
           :key="paragraph.id"
+          :class="{'mod-no-lg': paragraph.onlyMobile}"
         ) {{paragraph.text}}
       img(
         v-if="image"
@@ -20,6 +21,11 @@
       )
 
     .game__buttons-container
+      button.button.game__button.t-orange(
+        v-if="isStartGameAgain"
+        type="button"
+        @click="startAgain"
+      ) Играть снова
       button.button.game__button.t-blue(
         v-if="isButton"
         type="button"
@@ -39,6 +45,8 @@
 </template>
 
 <script>
+import router from "../router";
+
 export default {
   props: {
     textList: {
@@ -64,6 +72,10 @@ export default {
     isBackButton: {
       type: Boolean,
       require: false
+    },
+    isStartGameAgain: {
+      type: Boolean,
+      require: false
     }
   },
   methods: {
@@ -75,6 +87,9 @@ export default {
     },
     clickButton() {
       this.$emit(this.clickFunction)
+    },
+    startAgain() {
+      router.go(0)
     }
   }
 }
@@ -84,9 +99,9 @@ export default {
 .game {
   &__text-box {
     position:        absolute;
-    top:             50%;
+    top:             10%;
     left:            50%;
-    transform:       translate(-50%, -50%);
+    transform:       translateX(-50%);
     padding:         20px 15px;
     min-width:       280px;
 
@@ -95,22 +110,17 @@ export default {
     justify-content: space-between;
     align-items:     center;
 
-    z-index:         100;
+    z-index:         1000;
     text-align:      center;
     background:      $color-light-blue;
     box-shadow:      3px 5px 14px rgba(0, 0, 0, 0.25);
     border-radius:   30px;
     box-sizing:      border-box;
 
-    @include w-from($screen-md) {
-      top: 30%;
-    }
-
     @include w-from($screen-lg) {
-      top:       70px;
-      width:     510px;
-      height:    340px;
-      transform: translate(-50%, 0);
+      top:    70px;
+      width:  510px;
+      height: 340px;
     }
 
     @include w-from($screen-xl) {
@@ -156,11 +166,13 @@ export default {
       }
 
       img {
-        height: 100%;
-        width:  auto;
+        height:     100%;
+        max-height: 130px;
+        width:      auto;
 
         @include w-from($screen-lg) {
-          max-width: 170px;
+          max-width:  170px;
+          max-height: none;
         }
 
         @include w-from($screen-xl) {
@@ -179,9 +191,33 @@ export default {
   &__buttons-container {
     display:         flex;
     width:           100%;
-    flex-direction:  row;
+    flex-direction:  column;
     align-items:     center;
     justify-content: space-around;
+
+    @include w-from($screen-md) {
+      flex-direction: row;
+    }
+
+    button {
+      width: 65%;
+
+      &:first-child {
+        margin-bottom: 15px;
+
+        @include w-from($screen-md) {
+          margin-bottom: 0;
+        }
+      }
+
+      &:last-child {
+        margin: 0;
+      }
+
+      @include w-from($screen-md) {
+        width: fit-content;
+      }
+    }
   }
 }
 </style>

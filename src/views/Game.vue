@@ -1,48 +1,51 @@
 <template lang="pug">
-  main.main
-    section.game
-      GameClouds
-      transition(name='game-transition' tag="div")
-        GameText(
-          v-if="step<8 & !isMiniGame"
-          :text-list="nextStep.info.textList"
-          :image="nextStep.info.image"
-          :is-button="false"
-          :link-text="'Дальше'"
-          :is-back-button="nextStep.isBackButton"
-          @show-next-step="switchStep"
-          @show-previous-step="previousStep"
-          :key="step"
+  transition(name="preloader")
+    main.main
+      BasePreloader
+      section.game
+        GameClouds
+        transition(name='game-transition' tag="div")
+          GameText(
+            v-if="step<8 & !isMiniGame"
+            :text-list="nextStep.info.textList"
+            :image="nextStep.info.image"
+            :is-button="false"
+            :link-text="'Дальше'"
+            :is-back-button="nextStep.isBackButton"
+            @show-next-step="switchStep"
+            @show-previous-step="previousStep"
+            :key="step"
+          )
+
+        transition(name='game-transition' tag="div")
+          GameText(
+            v-if="isMiniGame"
+            :text-list="miniGameStates[miniGameIndex].gameItems[stepMiniGame].textList"
+            :image="miniGameStates[miniGameIndex].gameItems[stepMiniGame].image"
+            :is-button="false"
+            :link-text="miniGameStates[miniGameIndex].gameItems[stepMiniGame].linkText"
+            :is-back-button="true"
+            @show-next-step="nextStepMiniGame"
+            @show-previous-step="previousStepMiniGame"
+            :key="stepMiniGame"
+          )
+
+        GameBackground(
+          :background-id="nextStep.background.mainImageId"
+          :show-item-id="nextStep.background.addElementId"
+          :key="nextStep.background.addElementId"
+          :is-previous-step="isPreviousStep"
+          @start-game-train="startGameTrain"
+          @start-game-car="startGameCar"
         )
+        TypoLink2(:href="{name: 'Home'}") Выйти на главную
 
-      transition(name='game-transition' tag="div")
-        GameText(
-          v-if="isMiniGame"
-          :text-list="miniGameStates[miniGameIndex].gameItems[stepMiniGame].textList"
-          :image="miniGameStates[miniGameIndex].gameItems[stepMiniGame].image"
-          :is-button="false"
-          :link-text="miniGameStates[miniGameIndex].gameItems[stepMiniGame].linkText"
-          :is-back-button="true"
-          @show-next-step="nextStepMiniGame"
-          :key="stepMiniGame"
-        )
-
-      GameBackground(
-        :background-id="nextStep.background.mainImageId"
-        :show-item-id="nextStep.background.addElementId"
-        :key="nextStep.background.addElementId"
-        :is-previous-step="isPreviousStep"
-        @start-game-train="startGameTrain"
-        @start-game-car="startGameCar"
-      )
-      TypoLink2(:href="{name: 'Home'}") Выйти на главную
-
-      transition(name='game-transition' tag="div")
-        button.t-link2.game__start-again(
-          v-if="step===8"
-          type="button"
-          @click="startAgain"
-        ) Начать с начала
+        transition(name='game-transition' tag="div")
+          button.t-link2.game__start-again(
+            v-if="step===8"
+            type="button"
+            @click="startAgain"
+          ) Начать с начала
 </template>
 
 <script>
@@ -50,9 +53,10 @@ import GameClouds from "../components/GameClouds";
 import GameText from "../components/GameText";
 import GameBackground from "../components/GameBackground";
 import router from "../router";
+import BasePreloader from "@/components/BasePreloader";
 
 export default {
-  components: {GameBackground, GameText, GameClouds},
+  components: {BasePreloader, GameBackground, GameText, GameClouds},
   data() {
     return {
       states: [
@@ -288,6 +292,9 @@ export default {
         this.stepMiniGame += 1
       }
     },
+    previousStepMiniGame() {
+      (this.stepMiniGame > 0) ? this.stepMiniGame -= 1 : this.isMiniGame = false
+    },
     startGameTrain() {
       this.isMiniGame = true;
       this.miniGameIndex = 0;
@@ -312,6 +319,7 @@ export default {
   position: relative;
   width:    100%;
   height:   100vh;
+  z-index:  2000;
 
   &__start-again {
     left:  16px;

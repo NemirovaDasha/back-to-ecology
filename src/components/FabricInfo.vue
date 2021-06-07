@@ -28,6 +28,7 @@
             :is-button="true"
             :link-text="'Закончить игру'"
             :click-function="'end-game-trees'"
+            :is-start-game-again="true"
             style="z-index: 2000;"
             @end-game-trees="endGameTrees"
           )

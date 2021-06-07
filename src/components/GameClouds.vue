@@ -1,14 +1,14 @@
 <template lang="pug">
-  .game-clouds__container(id='clouds')
-    .game-clouds__cloud-1(data-depth="0.2")
+  .game-clouds__container
+    .game-clouds__cloud-1
       img(src="assets/img/game/clouds/cloud-1.svg")
-    .game-clouds__cloud-2(data-depth="0.1")
+    .game-clouds__cloud-2
       img(src="assets/img/game/clouds/cloud-2.svg")
-    .game-clouds__cloud-3(data-depth="0.4")
+    .game-clouds__cloud-3
       img(src="assets/img/game/clouds/cloud-4.svg")
-    .game-clouds__cloud-4(data-depth="0.2")
+    .game-clouds__cloud-4
       img(src="assets/img/game/clouds/cloud-5.svg")
-    .game-clouds__clouds(data-depth="0.1")
+    .game-clouds__clouds
       .game-clouds__box
         img(src="assets/img/game/clouds/clouds.svg")
 </template>

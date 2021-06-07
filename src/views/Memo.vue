@@ -1,14 +1,16 @@
 <template lang="pug">
-  main.main
-    MemoInfo
-
+  transition(name="preloader")
+    main.main
+      BasePreloader
+      MemoInfo
 </template>
 
 <script>
 import MemoInfo from "@/components/MemoInfo";
+import BasePreloader from "../components/BasePreloader";
 
 export default {
-  components: {MemoInfo},
+  components: {BasePreloader, MemoInfo},
   methods: {
     init() {
       document.body.classList.add('no-overflow');

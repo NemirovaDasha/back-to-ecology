@@ -1,5 +1,6 @@
 <template lang="pug">
   main.main.train
+    BasePreloader
     TrainInfo(
       v-if="!isGameTrain"
       :id-block="idBlockShow"
@@ -19,9 +20,10 @@
 import TrainBackground from "../components/TrainBackground";
 import TrainInfo from "../components/TrainInfo";
 import router from "../router";
+import BasePreloader from "../components/BasePreloader";
 
 export default {
-  components: {TrainInfo, TrainBackground},
+  components: {BasePreloader, TrainInfo, TrainBackground},
   data() {
     return {
       isGameTrain: false,
