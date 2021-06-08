@@ -1,11 +1,11 @@
 <template lang="pug">
   .clouds(id='clouds')
     .clouds.layer-1(data-depth="0.3")
-      img(src="@/assets/img/clouds/clouds-1.png")
+      img(src="@/assets/img/clouds/clouds-1.png" alt="Облако")
     .clouds.layer-2(data-depth="0.2")
-      img(src="@/assets/img/clouds/clouds-2.png")
+      img(src="@/assets/img/clouds/clouds-2.png" alt="Облако")
     .clouds.layer-3(data-depth="0.7")
-      img(src="@/assets/img/clouds/clouds-3.png")
+      img(src="@/assets/img/clouds/clouds-3.png" alt="Облако")
 </template>
 
 <script>

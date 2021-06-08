@@ -2,6 +2,7 @@
   img.train__passenger(
     :id="passengerParameter.id"
     :src="passengerParameter.src"
+    :alt="passengerParameter.alt"
     :class="{'m-2': passengerParameter.position.topPosition}"
     :style="passengerPosition"
   )

@@ -94,7 +94,11 @@ export default {
     }
   },
   mounted() {
-    setTimeout(this.init, 3000);
+    if (localStorage.step > 0) {
+      this.init();
+    } else {
+      setTimeout(this.init, 3000);
+    }
   }
 }
 </script>
@@ -265,7 +269,8 @@ export default {
   &-enter-active, &-leave-active {
     transition: opacity .5s;
   }
-  &-enter, &-leave-to{
+
+  &-enter, &-leave-to {
     opacity: 0;
   }
 }

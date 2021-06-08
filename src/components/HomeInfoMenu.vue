@@ -5,7 +5,7 @@
       p Я расскажу о том как развивались люди и как это влияло на экологию. А так же о том, что нужно делать теперь, чтобы помочь природе восстановиться.
       p Чтобы начать - нажми на кнопку!
 
-    TypoButton.t-orange(:href="{name: 'Rules'}") Начать
+    TypoButton.t-orange(:href="{name: gamePage}") {{buttonText}}
 
     .main-menu__links
       TypoLink1(:href="{name: 'About'}") О проекте
@@ -13,7 +13,16 @@
 </template>
 
 <script>
-export default {}
+export default {
+  computed:{
+      gamePage(){
+        return (localStorage.step > 0) ? 'Game' : 'Rules'
+      },
+      buttonText(){
+        return (localStorage.step > 0) ? 'Продолжить' : 'Начать'
+      }
+  }
+}
 </script>
 
 <style lang="scss">

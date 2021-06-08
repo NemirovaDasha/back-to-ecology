@@ -55,54 +55,63 @@ export default {
           id: 'human-1',
           isPassenger: true,
           src: 'assets/img/game/train/people/human1-1.svg',
+          alt: 'Человек 1',
           class: 'human1'
         },
         {
           id: 'human-2',
           isPassenger: true,
           src: 'assets/img/game/train/people/human2-1.svg',
+          alt: 'Человек 2',
           class: 'human2'
         },
         {
           id: 'human-3',
           isPassenger: true,
           src: 'assets/img/game/train/people/human3-1.svg',
+          alt: 'Человек 3',
           class: 'human3'
         },
         {
           id: 'human-4',
           isPassenger: true,
           src: 'assets/img/game/train/people/human4-1.svg',
+          alt: 'Человек 4',
           class: 'human4'
         },
         {
           id: 'human-5',
           isPassenger: true,
           src: 'assets/img/game/train/people/human5-1.svg',
+          alt: 'Человек 5',
           class: 'human5'
         },
         {
           id: 'human-6',
           isPassenger: true,
           src: 'assets/img/game/train/people/human6-1.svg',
+          alt: 'Человек 6',
           class: 'human6'
         },
         {
           id: 'human-7',
           isPassenger: true,
           src: 'assets/img/game/train/people/human7-1.svg',
+          alt: 'Человек 7',
           class: 'human7'
         },
         {
           id: 'human-8',
           isPassenger: false,
           src: 'assets/img/game/train/people/human8.svg',
+          alt: 'Человек 8',
           class: 'human8'
         },
         {
           id: 'human-9',
           isPassenger: false,
           src: 'assets/img/game/train/people/human9.svg',
+          alt: 'Человек 9',
           class: 'human9'
         }
       ],
@@ -110,6 +119,7 @@ export default {
         {
           id: 'passenger-1',
           src: 'assets/img/game/train/people/human1-2.svg',
+          alt: 'Пассажир 1',
           position: {
             right: '26.49%',
             topPosition: false
@@ -118,6 +128,7 @@ export default {
         {
           id: 'passenger-2',
           src: 'assets/img/game/train/people/human2-2.svg',
+          alt: 'Пассажир 2',
           position: {
             right: '34.3%',
             topPosition: true
@@ -126,6 +137,7 @@ export default {
         {
           id: 'passenger-3',
           src: 'assets/img/game/train/people/human3-2.svg',
+          alt: 'Пассажир 3',
           position: {
             right: '4.3%',
             topPosition: false
@@ -134,6 +146,7 @@ export default {
         {
           id: 'passenger-4',
           src: 'assets/img/game/train/people/human4-2.svg',
+          alt: 'Пассажир 4',
           position: {
             right: '23.2%',
             topPosition: false
@@ -142,6 +155,7 @@ export default {
         {
           id: 'passenger-5',
           src: 'assets/img/game/train/people/human5-2.svg',
+          alt: 'Пассажир 5',
           position: {
             right: '15.8%',
             topPosition: true
@@ -150,6 +164,7 @@ export default {
         {
           id: 'passenger-6',
           src: 'assets/img/game/train/people/human6-2.svg',
+          alt: 'Пассажир 6',
           position: {
             right: '19.9%',
             topPosition: false
@@ -158,6 +173,7 @@ export default {
         {
           id: 'passenger-7',
           src: 'assets/img/game/train/people/human7-2.svg',
+          alt: 'Пассажир 7',
           position: {
             right: '29.75%',
             topPosition: false

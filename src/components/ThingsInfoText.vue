@@ -2,24 +2,31 @@
   .wrapper.things__container
     BaseTextItem.things__text(
       src="assets/img/things/toothbrush.svg"
+      :alt="'Зубная щетка'"
       :text="['Щетка, конечно, не&nbsp;одноразовый предмет, но&nbsp;покупаем мы&nbsp;его часто. Обычную пластиковую зубную щетку можно заменить бамбуковой или щеткой со&nbsp;сменной головкой.']"
     )
     BaseTextItem.things__text(
       src="assets/img/things/cup.svg"
+      :alt="'Стакан для карандашей'"
       :text="['Если есть ненужные вещи, например, стаканчик из-под лимонада, то&nbsp;можно делать из&nbsp;них поделки. Придумать интересный стаканчик для карандашей и&nbsp;разукрасить его фломастерами.', 'Так вещи не&nbsp;будут валяться без дела и&nbsp;будет меньше мусора.']"
     )
     BaseTextItem.things__text(
       src="assets/img/things/bottle.svg"
+      :alt="'Бутылка для воды'"
       :text="['Нам нужно пить воду в&nbsp;течении дня. Если не&nbsp;покупать воду в&nbsp;пластиковых бутылках очень часто, а&nbsp;например, брать с&nbsp;собой в&nbsp;удобной бутылочке или даже в&nbsp;термосе.']"
     )
     BaseTextItem.things__text(
       src="assets/img/things/tubule.svg"
+      :alt="'Трубочки'"
       :text="['Если любишь пить из&nbsp;трубочки, то&nbsp;можно заменить одноразовые пластиковые трубочки на&nbsp;металлические. Они прослужат долго, если их&nbsp;мыть после каждого использования специальной щеточкой.']"
     )
 
     ThingsInfoTextWish
 
-    img.things__image.mod-no-sm(src="assets/img/things/imagine.svg")
+    img.things__image.mod-no-sm(
+      src="assets/img/things/imagine.svg"
+      alt="главный герой"
+      )
 </template>
 
 <script>

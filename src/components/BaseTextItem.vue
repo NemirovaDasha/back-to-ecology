@@ -4,13 +4,20 @@
       p(
         v-for="paragraph in text" v-html="paragraph"
         :key="id")
-    img(:src="src")
+    img(
+      :src="src"
+      :alt="alt"
+      )
 </template>
 
 <script>
 export default {
   props: {
     src: {
+      type: String,
+      require: true
+    },
+    alt: {
       type: String,
       require: true
     },

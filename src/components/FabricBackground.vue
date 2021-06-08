@@ -1,20 +1,20 @@
 <template lang="pug">
   .fabric__container
     .fabric__smoke-container
-      img.fabric__smoke3(src="assets/img/game/main/smoke/smoke3.svg")
-      img.fabric__smoke2(src="assets/img/game/main/smoke/smoke2.svg")
-      img.fabric__smoke1(src="assets/img/game/main/smoke/smoke1.svg")
+      img.fabric__smoke3(src="assets/img/game/main/smoke/smoke3.svg" alt="Дым")
+      img.fabric__smoke2(src="assets/img/game/main/smoke/smoke2.svg" alt="Дым")
+      img.fabric__smoke1(src="assets/img/game/main/smoke/smoke1.svg" alt="Дым")
     .fabric__smoke-container
-      img.fabric__smoke3(src="assets/img/game/main/smoke/smoke3.svg")
-      img.fabric__smoke2(src="assets/img/game/main/smoke/smoke2.svg")
-      img.fabric__smoke1(src="assets/img/game/main/smoke/smoke1.svg")
+      img.fabric__smoke3(src="assets/img/game/main/smoke/smoke3.svg" alt="Дым")
+      img.fabric__smoke2(src="assets/img/game/main/smoke/smoke2.svg" alt="Дым")
+      img.fabric__smoke1(src="assets/img/game/main/smoke/smoke1.svg" alt="Дым")
     .fabric__smoke-container
-      img.fabric__smoke3(src="assets/img/game/main/smoke/smoke3.svg")
-      img.fabric__smoke2(src="assets/img/game/main/smoke/smoke2.svg")
-      img.fabric__smoke1(src="assets/img/game/main/smoke/smoke1.svg")
-    img.fabric__build(src="assets/img/game/fabric/fabric.svg")
+      img.fabric__smoke3(src="assets/img/game/main/smoke/smoke3.svg" alt="Дым")
+      img.fabric__smoke2(src="assets/img/game/main/smoke/smoke2.svg" alt="Дым")
+      img.fabric__smoke1(src="assets/img/game/main/smoke/smoke1.svg" alt="Дым")
+    img.fabric__build(src="assets/img/game/fabric/fabric.svg" alt="Фабрика")
 
-    img.fabric__hero(src="assets/img/game/fabric/hero.svg")
+    img.fabric__hero(src="assets/img/game/fabric/hero.svg" alt="Главный герой")
 </template>
 
 <script>

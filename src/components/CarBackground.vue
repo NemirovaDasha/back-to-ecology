@@ -17,7 +17,10 @@
           v-if="answerType==='electric'"
           :is-success="isCorrectAnswer"
         )
-        img(src="assets/img/game/car/electric.svg")
+        img(
+          src="assets/img/game/car/electric.svg"
+          alt="Электрическая заправка"
+        )
 
     button.car__station.m-gas(
       type="button"
@@ -28,9 +31,15 @@
           v-if="answerType==='gas'"
           :is-success="isCorrectAnswer"
         )
-        img(src="assets/img/game/car/gas.svg")
+        img(
+          src="assets/img/game/car/gas.svg"
+          alt="Бензоколонка"
+        )
 
-    img.car__road(src="assets/img/game/car/road.svg")
+    img.car__road(
+      src="assets/img/game/car/road.svg"
+      alt="Дорога"
+    )
 </template>
 
 <script>
@@ -47,14 +56,14 @@ export default {
           number: 1,
           type: 'electric',
           image: 'assets/img/game/car/cars/car1.svg',
-          alt: 'машина'
+          alt: 'Электро-машина'
         },
         {
           id: 'car2',
           number: 2,
           type: 'electric',
           image: 'assets/img/game/car/cars/car2.svg',
-          alt: 'машина'
+          alt: 'Электро-машина'
         },
         {
           id: 'car3',
@@ -68,7 +77,7 @@ export default {
           number: 4,
           type: 'electric',
           image: 'assets/img/game/car/cars/car4.svg',
-          alt: 'машина'
+          alt: 'Электро-машина'
         },
         {
           id: 'car5',
@@ -82,7 +91,7 @@ export default {
           number: 6,
           type: 'electric',
           image: 'assets/img/game/car/cars/car6.svg',
-          alt: 'машина'
+          alt: 'Электро-машина'
         },
         {
           id: 'car7',
@@ -103,7 +112,7 @@ export default {
           number: 9,
           type: 'electric',
           image: 'assets/img/game/car/cars/car9.svg',
-          alt: 'машина'
+          alt: 'Электро-машина'
         },
         {
           id: 'car10',
@@ -117,7 +126,7 @@ export default {
           number: 11,
           type: 'electric',
           image: 'assets/img/game/car/cars/car11.svg',
-          alt: 'машина'
+          alt: 'Электро-машина'
         }
       ],
       cars: [],

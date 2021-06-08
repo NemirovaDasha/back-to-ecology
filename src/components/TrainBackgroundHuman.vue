@@ -7,6 +7,7 @@
       :id="humanParameter.id"
       :name="humanType"
       :src="humanParameter.src"
+      :alt="humanParameter.alt"
     )
 
 </template>
