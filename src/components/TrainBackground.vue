@@ -1,6 +1,5 @@
 <template lang="pug">
   .train__container
-
     TrainBackgroundHuman(
       v-for="human in humansList"
       :key="human.id"
@@ -198,7 +197,8 @@ export default {
       },
       gameCounter: 0,
       currentHuman: 'human1',
-      showCloud: false
+      showCloud: false,
+      gameSetPassengers: {}
     }
   },
   methods: {
@@ -211,8 +211,9 @@ export default {
         const passenger = document.getElementById('passenger-' + humanId);
         passenger.classList.remove('mod-hide');
         human.classList.add('mod-hide');
-        setTimeout(()=>human.style.display = 'none', 700);
-        this.gameCounter += 1;
+        setTimeout(() => human.style.display = 'none', 700);
+        this.gameSetPassengers.add(humanId);
+        this.gameCounter = this.gameSetPassengers.size
 
         if (this.gameCounter === 7) {
           setTimeout(this.endGameTrains, 4000)
@@ -226,6 +227,9 @@ export default {
     endGameTrains() {
       this.$emit('end-game-train');
     }
+  },
+  mounted() {
+    this.gameSetPassengers = new Set();
   }
 }
 </script>
@@ -233,15 +237,20 @@ export default {
 <style lang="scss">
 .train {
   &__container {
-    position:   relative;
-    min-height: max-content;
-    min-width:  max-content;
+    position:       relative;
+    min-height:     max-content;
+    min-width:      max-content;
+    pointer-events: auto;
 
     @include w-from($screen-lg) {
       width:           100vw;
       height:          100vh;
       background:      url("/assets/img/game/train/background2_2.svg") no-repeat bottom;
       background-size: cover;
+    }
+
+    &.block-game {
+      pointer-events: none;
     }
   }
 

@@ -8,6 +8,7 @@
       @end-game="endGame"
     )
     TrainBackground(
+      :class="{'block-game': !isGameTrain}"
       @end-game-train="endGameTrain"
     )
 

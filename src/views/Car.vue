@@ -9,6 +9,7 @@
     )
 
     CarBackground(
+      :class="{'block-game': !isGameCar}"
       @end-game-cars="endGameCars"
     )
 

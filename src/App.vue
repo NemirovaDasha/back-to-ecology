@@ -8,21 +8,8 @@
 </template>
 
 <script>
-import Parallax from 'parallax-js';
 
-export default {
-  methods: {
-    init() {
-      let clouds = document.getElementById('clouds');
-      if (clouds != null) {
-        new Parallax(clouds);
-      }
-    }
-  },
-  mounted() {
-    this.init()
-  }
-}
+export default {}
 </script>
 
 <style lang="scss">
@@ -384,8 +371,9 @@ a, p {
 }
 
 .back-to-game {
-  left:  16px !important;
-  right: auto !important;
+  left:    16px !important;
+  right:   auto !important;
+  z-index: 2000;
 
   @include w-from($screen-md) {
     right: 132px !important;

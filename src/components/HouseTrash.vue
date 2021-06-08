@@ -1,12 +1,12 @@
 <template lang="pug">
-  .house__trash-container
+  .house__trash-containe
     .house__bins
       img(
         v-for="bin in binList"
         :key="bin.id"
         :id="bin.type"
         :src="bin.image"
-        :class="bin.type"
+        :class="binClass(bin.type)"
         @dragover.prevent
         @drop.prevent="drop"
       )
@@ -15,7 +15,7 @@
       img(src="assets/img/game/house/bins/shadow1.svg")
       img(
         src="assets/img/game/house/bins/shadow1.svg"
-        :class="{'m-rotate':isBinRotate}"
+        :class="{'m-rotate': unblockGame}"
       )
 
     .house__trash
@@ -25,6 +25,7 @@
         :id="trash.type + '/' + trash.id"
         :src="trash.image"
         :style="trash.position"
+        :class="{'block-game': !unblockGame}"
         draggable="true"
         @dragstart="dragStart"
         @dragover.stop
@@ -43,7 +44,7 @@ import BaseGameHelp from "./BaseGameHelp";
 export default {
   components: {BaseGameHelp},
   props: {
-    rotateBin: {
+    unblockGame: {
       type: Boolean,
       require: false
     }
@@ -231,16 +232,12 @@ export default {
     dragStart(e) {
       const target = e.target;
       e.dataTransfer.setData('trash_name', target.id)
-    }
-  },
-  computed: {
-    isBinRotate() {
-      if (this.rotateBin) {
-        const paperBin = document.getElementById('paper');
-        paperBin.classList.add('m-rotate');
-        return true;
+    },
+    binClass(binClass) {
+      if (this.unblockGame) {
+        return (binClass==='paper') ? binClass + ' m-rotate' : binClass
       } else {
-        return false;
+        return binClass + ' block-game';
       }
     }
   }
@@ -250,6 +247,12 @@ export default {
 <style lang="scss">
 .house {
   &__bins {
+    pointer-events: auto;
+
+    .block-game {
+      pointer-events: none;
+    }
+
     img {
       position: absolute;
       bottom:   14vw;
@@ -314,6 +317,12 @@ export default {
   }
 
   &__trash {
+    pointer-events: auto;
+
+    .block-game {
+      pointer-events: none;
+    }
+
     img {
       position: absolute;
       z-index:  1000;

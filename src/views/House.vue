@@ -3,11 +3,11 @@
     BasePreloader
     HouseInfo(
       :end-game="endGame"
-      @rotate-bin="rotateBin=true"
+      @unblock-game="unblockGame = true"
     )
     HouseBackground
     HouseTrash(
-      :rotate-bin="rotateBin"
+      :unblock-game="unblockGame"
       @end-game="endGame=true"
     )
 
@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       endGame: false,
-      rotateBin: false
+      unblockGame: false
     }
   },
   methods: {
@@ -43,13 +43,13 @@ export default {
 
 <style lang="scss">
 .house {
-  height:     100vh;
-  overflow-y: hidden;
   position:   relative;
+  height:     100vh;
+  min-height: 515px;
+  overflow-y: auto;
 
-  @include w-to($screen-lg) {
-    min-height: 515px;
-    overflow-y: auto;
+  @include w-from($screen-lg) {
+    min-height: 640px;
   }
 }
 </style>

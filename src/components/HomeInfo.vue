@@ -114,11 +114,12 @@ export default {
   height:         100vh;
   display:        flex;
   flex-direction: column;
+  overflow: hidden;
 
   &__back {
     position: relative;
-    width:    100%;
-    height:   100%;
+    width:    100vw;
+    height:   100vh;
 
     img {
       position: absolute;

@@ -91,9 +91,7 @@
             img.game__houses(src="assets/img/game/main/houses.svg")
 
       transition(name='game-back')
-        .game__background-container(
-          :class="{'m-rules': isRules}"
-        )
+        .game__background-container
           img.game__back(
             v-if="backgroundId===1"
             src="assets/img/game/back.svg"
@@ -156,17 +154,19 @@ export default {
 <style lang="scss">
 .game {
   &__background {
-    position:   absolute;
-    bottom:     0;
-    left:       0;
-    right:      0;
-    width:      100%;
-    height:     auto;
-    overflow-x: scroll;
-    overflow-y: visible;
+    position:    absolute;
+    bottom:      0;
+    left:        0;
+    right:       0;
+    width:       100%;
+    height:      auto;
+    overflow-x:  scroll;
+    overflow-y:  visible;
+    padding-top: 20%;
 
     @include w-from($screen-md) {
-      overflow: visible;
+      overflow:    visible;
+      padding-top: 0;
     }
   }
 
@@ -223,6 +223,13 @@ export default {
     background:      url("/assets/img/game/back.svg") no-repeat bottom;
     background-size: contain;
 
+    @include w-to($screen-md) {
+      img {
+        height: 100%;
+        width:  100%;
+      }
+    }
+
     &.m-second {
       background:      url("/assets/img/game/back2.svg") no-repeat bottom;
       background-size: contain;
@@ -231,18 +238,6 @@ export default {
     &.m-third {
       background:      url("/assets/img/game/back3.svg") no-repeat bottom;
       background-size: contain;
-    }
-
-    @include w-to($screen-md) {
-      margin-top: 5%;
-      img {
-        height: 100%;
-        width:  100%;
-      }
-
-      &.m-rules {
-        margin-bottom: -5%;
-      }
     }
   }
 

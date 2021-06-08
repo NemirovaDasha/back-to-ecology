@@ -20,7 +20,7 @@
         :src="image"
       )
 
-    .game__buttons-container
+    .game__buttons-container.m-buttons
       button.button.game__button.t-orange(
         v-if="isStartGameAgain"
         type="button"
@@ -31,6 +31,7 @@
         type="button"
         @click="clickButton"
       ) {{linkText}}
+    .game__buttons-container
       button.t-link1.t-orange.game__link(
         v-if="isBackButton"
         type="button"
@@ -181,9 +182,12 @@ export default {
       }
 
       p {
-        padding-right: 20px;
-        margin-bottom: 0;
-        box-sizing:    border-box;
+        box-sizing: border-box;
+
+        @include w-from($screen-md) {
+          padding-right: 20px;
+          margin-bottom: 0;
+        }
       }
     }
   }
@@ -191,31 +195,35 @@ export default {
   &__buttons-container {
     display:         flex;
     width:           100%;
-    flex-direction:  column;
+    flex-direction:  row;
     align-items:     center;
     justify-content: space-around;
 
-    @include w-from($screen-md) {
-      flex-direction: row;
-    }
-
-    button {
-      width: 65%;
-
-      &:first-child {
-        margin-bottom: 15px;
-
-        @include w-from($screen-md) {
-          margin-bottom: 0;
-        }
-      }
-
-      &:last-child {
-        margin: 0;
-      }
+    &.m-buttons {
+      flex-direction: column;
 
       @include w-from($screen-md) {
-        width: fit-content;
+        flex-direction: row;
+      }
+
+      button {
+        width: 65%;
+
+        &:first-child {
+          margin-bottom: 15px;
+
+          @include w-from($screen-md) {
+            margin-bottom: 0;
+          }
+        }
+
+        &:last-child {
+          margin: 0;
+        }
+
+        @include w-from($screen-md) {
+          width: fit-content;
+        }
       }
     }
   }

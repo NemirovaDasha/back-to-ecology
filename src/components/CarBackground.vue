@@ -177,6 +177,14 @@ export default {
 
 <style lang="scss">
 .car {
+  &__background {
+    pointer-events: auto;
+
+    &.block-game {
+      pointer-events: none;
+    }
+  }
+
   &__road {
     width:      100vw;
     max-height: 90vh;

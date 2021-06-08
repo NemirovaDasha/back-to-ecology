@@ -23,7 +23,8 @@
     transition(name="house-text")
       .house__text(v-if="showBlockId===2 & !endGame")
         p На баках подписано какой вид мусора туда можно выбрасывать. Найди все предметы и разложи их в правильные баки.
-        p Перетягивай предметы мышкой.
+        p.mod-only-lg Перетягивай предметы c помощью мыши.
+        p.mod-no-lg Перетягивай предметы с помощью пальца.
 
     transition(name="house-text")
       .house__text(v-if="endGame & showBlockId===2")
@@ -38,7 +39,7 @@
       .house__text(v-if="endGame & showBlockId===3")
         TypoH2Bold Что же можно сделать?
         p Не бросай мусор на улице, выкидывай только в специальные места.
-        p Старайся использовать некоторые вещи повторно и находить им новое применение, а вместо одноразовых вещей использовать многоразовые.
+        p Старайся использовать вместо одноразовых вещей использовать многоразовые.
         p Тогда будет меньше мусора, а вокруг будет чище.
         button.t-link1.t-orange.game__link(
           type="button"
@@ -68,7 +69,7 @@ export default {
     switchStep() {
       this.showBlockId += 1
       if (this.showBlockId === 2) {
-        this.$emit('rotate-bin')
+        this.$emit('unblock-game')
       }
     },
     startAgain(){

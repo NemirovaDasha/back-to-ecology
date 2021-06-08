@@ -1,6 +1,6 @@
 <template lang="pug">
   .clouds(id='clouds')
-    .clouds.layer-1(data-depth="0.3")
+    .clouds.layer-1(data-depth="0.4")
       img(src="@/assets/img/clouds/clouds-1.png" alt="Облако")
     .clouds.layer-2(data-depth="0.2")
       img(src="@/assets/img/clouds/clouds-2.png" alt="Облако")
