@@ -1,5 +1,11 @@
 <template lang="pug">
   #app
+    transition(name="timer")
+      BaseTimeOut(
+        v-if="stopGame"
+        key="stopGame"
+        @reset-timer="resetTimer"
+      )
     transition(
       name="preloader"
       mode="out-in"
@@ -9,7 +15,76 @@
 
 <script>
 
-export default {}
+import BaseTimeOut from "./components/BaseTimeOut";
+
+export default {
+  components: {BaseTimeOut},
+  data() {
+    return {
+      startTime: 0,
+      maxMinutes: 10,
+      stopGame: false
+    }
+  },
+  methods: {
+    getTime() {
+      const time = localStorage.getItem('startTime');
+      const newDate = new Date();
+      if (time) {
+        const currentTime = new Date(time);
+        const checkDif = Math.floor((newDate.getTime() - currentTime.getTime()) / 60000);
+        if (checkDif >= 60) {
+          this.startTime = newDate;
+          localStorage.setItem('startTime', newDate);
+        } else {
+          this.startTime = currentTime;
+        }
+      } else {
+        this.startTime = newDate;
+        localStorage.setItem('startTime', newDate)
+      }
+    },
+    timer() {
+      let now = new Date();
+      let currentMinutes = Math.floor((now.getTime() - this.startTime.getTime()) / 60000);
+      if (currentMinutes >= this.maxMinutes) {
+        this.stopGame = true;
+        localStorage.setItem('stopGame', 'stop');
+        return true;
+      } else {
+        return false
+      }
+    },
+    minutesCounter() {
+      this.timer();
+      let maxTime = setInterval(() => {
+        let checkTime = this.timer();
+        if (checkTime) {
+          clearInterval(maxTime);
+        }
+      }, 60000)
+    },
+    resetTimer() {
+      const now = new Date();
+      localStorage.setItem('startTime', now);
+      localStorage.setItem('stopGame', 'start');
+      localStorage.setItem('restTimerSeconds', 0);
+      localStorage.setItem('restTimerMinutes', 0);
+      this.stopGame = false;
+      this.getTime();
+      this.minutesCounter();
+    }
+  },
+  mounted() {
+    this.getTime();
+    const checkStop = localStorage.getItem('stopGame');
+    if (checkStop === 'stop') {
+      this.stopGame = true;
+    } else {
+      this.minutesCounter();
+    }
+  }
+}
 </script>
 
 <style lang="scss">
@@ -495,10 +570,6 @@ a, p {
 
 .preloader-enter-active, .preloader-leave-active {
   transition: opacity 1.5s ease-out;
-  //
-  //.main {
-  //  animation: mainAnimation 3s;
-  //}
 
   .preloader {
     display:   flex;
@@ -530,6 +601,14 @@ a, p {
   .preloader {
     display: none;
   }
+}
+
+.timer-enter-active, .timer-leave-active {
+  transition: opacity 1s;
+}
+
+.timer-enter, .timer-leave-to {
+  opacity: 0;
 }
 
 @keyframes clockHandAnimation {

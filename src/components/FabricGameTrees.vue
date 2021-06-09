@@ -313,12 +313,13 @@ export default {
 
   &__plants {
     width: 100%;
+  }
 
-    img {
-      position: absolute;
-      width:    6vw;
-      z-index:  100;
-    }
+  &__plant {
+    position:       absolute;
+    width:          6vw;
+    z-index:        100;
+    pointer-events: none;
   }
 
   &__holes {

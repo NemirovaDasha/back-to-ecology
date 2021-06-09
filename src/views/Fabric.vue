@@ -60,19 +60,20 @@ export default {
 .fabric {
   height:     100vh;
   min-height: 650px;
-  overflow: hidden;
+  overflow:   hidden;
 
-  @include w-from($screen-md){
+  @include w-from($screen-md) {
     min-height: 500px;
   }
 
   &__background {
-    width:    100vw;
-    position: absolute;
-    bottom:   0;
-    left:     0;
-    right:    0;
-    z-index:  5;
+    width:          100vw;
+    position:       absolute;
+    bottom:         0;
+    left:           0;
+    right:          0;
+    z-index:        5;
+    pointer-events: none;
   }
 }
 

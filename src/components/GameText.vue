@@ -46,7 +46,6 @@
 </template>
 
 <script>
-import router from "../router";
 
 export default {
   props: {
@@ -90,7 +89,7 @@ export default {
       this.$emit(this.clickFunction)
     },
     startAgain() {
-      router.go(0)
+      location.reload();
     }
   }
 }

@@ -11,7 +11,7 @@
 
       BaseButtons
 
-      img.about__img(src="@/assets/img/other/about.svg")
+      img.about__img(src="@/assets/img/other/about.svg" alt='Главный герой')
 </template>
 
 <script>

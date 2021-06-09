@@ -20,6 +20,7 @@
         transition(name='game-transition' tag="div")
           GameText(
             v-if="isMiniGame"
+            :key="stepMiniGame"
             :text-list="miniGameStates[miniGameIndex].gameItems[stepMiniGame].textList"
             :image="miniGameStates[miniGameIndex].gameItems[stepMiniGame].image"
             :is-button="false"
@@ -27,7 +28,6 @@
             :is-back-button="true"
             @show-next-step="nextStepMiniGame"
             @show-previous-step="previousStepMiniGame"
-            :key="stepMiniGame"
           )
 
         GameBackground(
@@ -229,7 +229,18 @@ export default {
               textList: [
                 {
                   id: 0,
-                  text: 'Раньше машины выглядели примерно так и были диковинкой. Сейчас марок и видов машин очень много. Машина работает за счет двигателя. Но он во время работы выделяет выхлопные газы. Портится воздух и из-за этого всем становиться тяжело.'
+                  text: 'Раньше машины выглядели примерно так и были диковинкой. Сейчас марок и видов машин очень много.'
+                }
+              ],
+              image: 'assets/img/game/main/car.svg',
+              linkText: 'Дальше'
+            },
+            {
+              id: 2,
+              textList: [
+                {
+                  id: 0,
+                  text: 'Машина работает за счет двигателя. Но он во время работы выделяет выхлопные газы. Портится воздух и из-за этого всем становиться тяжело.'
                 }
               ],
               image: 'assets/img/game/main/car.svg',
@@ -279,7 +290,7 @@ export default {
       localStorage.step = this.step;
     },
     nextStepMiniGame() {
-      if (this.stepMiniGame > 0) {
+      if (this.miniGameStates[this.miniGameIndex].gameItems[this.stepMiniGame].id === 1) {
         switch (this.miniGameIndex) {
           case 0:
             router.push({name: "Train"});

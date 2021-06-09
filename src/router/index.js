@@ -54,6 +54,11 @@ const routes = [
     path: '/game-car',
     name: 'Car',
     component: () => import('../views/Car.vue')
+  },
+  {
+    path: '*',
+    name: 'Error',
+    component: Home
   }
 ]
 

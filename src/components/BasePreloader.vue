@@ -1,14 +1,13 @@
 <template lang="pug">
   .preloader
-    .preloader__icon
-      img.preloader__clock(src="assets/img/preloader/clock.svg")
-      img.preloader__clock-center(src="assets/img/preloader/center.svg")
-      img.preloader__minute-hand(src="assets/img/preloader/minuteHand.svg")
-      img.preloader__hour-hand(src="assets/img/preloader/hourHand.svg")
+    BasePreloaderClock
 </template>
 
 <script>
-export default {}
+import BasePreloaderClock from "./BasePreloaderClock";
+export default {
+  components: {BasePreloaderClock}
+}
 </script>
 
 <style lang="scss">
@@ -23,32 +22,7 @@ export default {}
   justify-content: center;
   align-items:     center;
   z-index:         10000;
-  background:      $color-light-blue;
-
-  &__icon {
-    position: relative;
-    width:    fit-content;
-  }
-
-  &__clock-center {
-    position:  absolute;
-    top:       50%;
-    left:      50%;
-    z-index:   1;
-    transform: translate(-50%, -50%);
-  }
-
-  &__minute-hand {
-    position: absolute;
-    top:      28.5%;
-    left:     26%;
-  }
-
-  &__hour-hand {
-    position: absolute;
-    top:      35%;
-    left:     50%;
-  }
+  background:      $color-background;
 }
 
 </style>

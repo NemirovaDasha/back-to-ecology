@@ -17,15 +17,18 @@ export default {}
 <style lang="scss">
 .house {
   &__glade {
-    position:   absolute;
-    bottom:     0;
-    left:       0;
-    right:      0;
-    width:      100vw;
-    object-fit: cover;
+    position:       absolute;
+    bottom:         0;
+    left:           0;
+    right:          0;
+    width:          100vw;
+    object-fit:     cover;
+    pointer-events: none;
   }
 
   &__trees {
+    pointer-events: none;
+
     img {
       position: absolute;
       z-index:  100;
@@ -57,11 +60,12 @@ export default {}
   }
 
   &__table {
-    position: absolute;
-    bottom:   5vw;
-    right:    8vw;
-    height:   14vw;
-    z-index:  101;
+    position:       absolute;
+    bottom:         5vw;
+    right:          8vw;
+    height:         14vw;
+    z-index:        101;
+    pointer-events: none;
   }
 }
 </style>
