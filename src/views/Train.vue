@@ -71,5 +71,6 @@ export default {
 
 .t-link2-train {
   background: rgba(white, 0.8);
+  z-index: 1000;
 }
 </style>

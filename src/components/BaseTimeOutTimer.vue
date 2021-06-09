@@ -1,14 +1,15 @@
 <template lang="pug">
   .timer
-    span.timer__minute#timer-minutes 00
-    span &nbsp;:&nbsp;
-    span.rimer__second#timer-seconds 00
+    .timer__container
+      span.timer__minute#timer-minutes 00
+      span &nbsp;:&nbsp;
+      span.rimer__second#timer-seconds 00
 </template>
 
 <script>
 export default {
   methods: {
-    isStopTimer(){
+    isStopTimer() {
       const isStop = localStorage.getItem('stopGame');
       return (isStop === 'stop')
     },
@@ -63,15 +64,44 @@ export default {
 
 <style lang="scss">
 .timer {
-  padding:       20px;
   background:    rgba(#568F11, 0.9);
-  border-radius: 20px;
+  border-radius: 14px;
   text-align:    center;
+  width:         100%;
+  margin-bottom: 20px;
+  padding:       15px 20px;
+  box-sizing:    border-box;
+
+  @include w-from($screen-md) {
+    width:   50%;
+    padding: 15px 20px;
+  }
+
+  @include w-from($screen-lg) {
+    width:         16%;
+    min-width:     145px;
+    padding:       20px;
+    margin-bottom: 0;
+  }
 
   span {
+    width:       34px;
     color:       white;
-    font-size:   34px;
-    line-height: 36px;
+    font-size:   22px;
+    line-height: 26px;
+
+    @include w-from($screen-md) {
+      font-size:   26px;
+      line-height: 30px;
+    }
+    @include w-from($screen-lg) {
+      font-size:   32px;
+      line-height: 34px;
+    }
+    @include w-from($screen-xl) {
+      font-size:   34px;
+      line-height: 36px;
+    }
   }
 }
 </style>

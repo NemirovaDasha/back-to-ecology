@@ -302,10 +302,12 @@ export default {
   }
 
   &__trees {
-    position: absolute;
-    left:     2.5%;
-    bottom:   63.4%;
-    width:    81%;
+    position:       absolute;
+    left:           2.5%;
+    bottom:         63.4%;
+    width:          81%;
+    z-index:        101;
+    pointer-events: none;
 
     @include w-from($screen-lg) {
       bottom: 35.8vw;
