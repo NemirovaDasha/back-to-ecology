@@ -2,9 +2,10 @@
   main.main.fabric
     BasePreloader
     FabricInfo(
+      :game-trees-end="isGameTreesEnd"
       @start-game-trees="isGameTrees=true"
       @end-game-trees="redirectToMain"
-      :game-trees-end="isGameTreesEnd"
+      @reload-game="reloadGame"
     )
 
     TypoLink2(:href="{name: 'Home'}") Выйти на главную
@@ -15,6 +16,7 @@
     transition(name="fabric-game")
       FabricGameTrees(
         v-if="isGameTrees"
+        :key="keyTrees"
         @end-game="endGameTrees"
       )
 
@@ -36,7 +38,8 @@ export default {
   data() {
     return {
       isGameTrees: false,
-      isGameTreesEnd: false
+      isGameTreesEnd: false,
+      keyTrees: 0
     }
   },
   methods: {
@@ -48,6 +51,11 @@ export default {
     },
     endGameTrees() {
       setTimeout(() => this.isGameTreesEnd = true, 5000)
+    },
+    reloadGame(){
+      this.isGameTreesEnd = false;
+      this.isGameTrees = true;
+      this.keyTrees += 1;
     }
   },
   mounted() {

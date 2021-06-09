@@ -4,9 +4,11 @@
     HouseInfo(
       :end-game="endGame"
       @unblock-game="unblockGame = true"
+      @reload-game="reloadGame"
     )
     HouseBackground
     HouseTrash(
+      :key="houseKey"
       :unblock-game="unblockGame"
       @end-game="endGame=true"
     )
@@ -27,12 +29,17 @@ export default {
   data() {
     return {
       endGame: false,
-      unblockGame: false
+      unblockGame: false,
+      houseKey: 0
     }
   },
   methods: {
     init() {
       document.body.classList.add('no-overflow');
+    },
+    reloadGame() {
+      this.houseKey += 1;
+      this.endGame = false;
     }
   },
   mounted() {

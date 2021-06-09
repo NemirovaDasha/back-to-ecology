@@ -3,11 +3,14 @@
     BasePreloader
     TrainInfo(
       v-if="!isGameTrain"
+      :key="keyTrain"
       :id-block="idBlockShow"
       @start-game="startGame"
       @end-game="endGame"
+      @reload-game="reloadGame"
     )
     TrainBackground(
+      :key="keyTrainBack"
       :class="{'block-game': !isGameTrain}"
       @end-game-train="endGameTrain"
     )
@@ -28,7 +31,9 @@ export default {
   data() {
     return {
       isGameTrain: false,
-      idBlockShow: 0
+      idBlockShow: 0,
+      keyTrain: 0,
+      keyTrainBack: 10
     }
   },
   methods: {
@@ -43,6 +48,11 @@ export default {
     endGameTrain() {
       this.isGameTrain = false;
       this.idBlockShow = 1;
+    },
+    reloadGame() {
+      this.keyTrain += 1;
+      this.keyTrainBack += 1;
+      this.idBlockShow = 0;
     }
   }
 }
@@ -59,7 +69,7 @@ export default {
   }
 }
 
-.t-link2-train{
+.t-link2-train {
   background: rgba(white, 0.8);
 }
 </style>

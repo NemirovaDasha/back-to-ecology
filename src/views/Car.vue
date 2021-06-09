@@ -6,9 +6,11 @@
       :id-block="idBlockShow"
       @start-game="startGame"
       @end-game="endGame"
+      @reload-game="reloadGame"
     )
 
     CarBackground(
+      :key="carKey"
       :class="{'block-game': !isGameCar}"
       @end-game-cars="endGameCars"
     )
@@ -32,7 +34,8 @@ export default {
   data() {
     return {
       isGameCar: false,
-      idBlockShow: 0
+      idBlockShow: 0,
+      carKey: 0
     }
   },
   methods: {
@@ -48,6 +51,11 @@ export default {
       this.isGameCar = false;
       this.idBlockShow = 1;
     },
+    reloadGame() {
+      this.carKey += 1;
+      this.isGameCar = false;
+      this.idBlockShow = 0;
+    }
   }
 }
 </script>

@@ -31,6 +31,7 @@
             :is-start-game-again="true"
             style="z-index: 2000;"
             @end-game-trees="endGameTrees"
+            @reload-game="reloadGame"
           )
         template(v-else)
           .fabric__text-container
@@ -79,6 +80,10 @@ export default {
     },
     endGameTrees() {
       this.$emit('end-game-trees')
+    },
+    reloadGame() {
+      this.idBlockShow = 2;
+      this.$emit('reload-game')
     }
   }
 }
@@ -100,8 +105,8 @@ export default {
       padding:   30px 0 0 16px;
 
       p {
-        font-size:   14px;
-        line-height: 18px;
+        font-size:     14px;
+        line-height:   18px;
         margin-bottom: 10px;
       }
     }
@@ -111,8 +116,8 @@ export default {
       padding:   30px 0 0 50px;
 
       p {
-        font-size:     18px;
-        line-height:   24px;
+        font-size:   18px;
+        line-height: 24px;
       }
     }
 

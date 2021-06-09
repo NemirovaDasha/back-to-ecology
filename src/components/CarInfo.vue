@@ -9,6 +9,7 @@
       style="z-index: 2000;"
       @start-game="$emit('start-game')"
       @end-game="$emit('end-game')"
+      @reload-game="$emit('reload-game')"
     )
 </template>
 

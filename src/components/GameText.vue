@@ -89,7 +89,7 @@ export default {
       this.$emit(this.clickFunction)
     },
     startAgain() {
-      location.reload();
+      this.$emit('reload-game')
     }
   }
 }

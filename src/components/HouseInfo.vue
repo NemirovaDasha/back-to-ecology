@@ -73,7 +73,8 @@ export default {
       }
     },
     startAgain(){
-      router.go(0)
+      this.showBlockId = 2;
+      this.$emit('reload-game')
     }
   }
 }
