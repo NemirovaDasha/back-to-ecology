@@ -6,7 +6,7 @@ module.exports = {
 // const types = ['vue'];
     types.forEach(type => addStyleResource(config.module.rule('scss').oneOf(type)));
   },
-  publicPath: process.env.NODE_ENV === 'production' ? '' : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/back-to-ecology/' : '/',
   outputDir: 'build',
   filenameHashing: true,
   productionSourceMap: false
